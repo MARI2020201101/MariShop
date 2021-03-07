@@ -4,7 +4,30 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.mari.shop.mapper.UserMapper">
-    <select id="count" resultType="int">
-        select count(*) from TBL_USER
-    </select>
+<select id="count" resultType="int">
+    select count(*) from TBL_USER
+</select>
+
+<insert id="insert" parameterType="com.mari.shop.model.RegisterModel">
+<selectKey >
+</selectKey>
+	insert into TBL_USER(USER_ID,ADDRESS1,ADDRESS2,EMAIL,PASSWORD,PHONE,ROLE,USERNAME) 
+	VALUES(
+		HIBERNATE_SEQUENCE.NEXTVAL,
+		#{address1},
+		#{address2},
+		#{email},
+		#{password},
+		#{phone},
+		'USER',
+		#{username}
+	)
+</insert>
+
+<select id="selectByUsernameAndPassword" resultType="com.mari.shop.domain.User" parameterType="string">
+	select * from TBL_USER WHERE USERNAME = #{username} and PASSWORD = #{password}
+</select>
+<select id="selectByUsername" resultType="integer" parameterType="string">
+	select count(*) from TBL_USER WHERE USERNAME = #{username}
+</select>
 </mapper>
