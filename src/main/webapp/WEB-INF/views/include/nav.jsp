@@ -1,20 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Ά½</a>
+  <a class="navbar-brand" href="#">β™΅</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">΄λΗόΐΞΗό</a>
+        <a class="nav-link" href="#">λ€ν•μΈν•</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">°υΐΞΗό</a>
+        <a class="nav-link" href="#">κ³°μΈν•</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">ΐΞΗό</a>
+        <a class="nav-link" href="#">μΈν•</a>
       </li>    
     </ul>
   </div>  

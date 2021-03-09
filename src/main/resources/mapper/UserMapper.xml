@@ -27,7 +27,7 @@
 <select id="selectByUsernameAndPassword" resultType="com.mari.shop.domain.User" parameterType="string">
 	select * from TBL_USER WHERE USERNAME = #{username} and PASSWORD = #{password}
 </select>
-<select id="selectByUsername" resultType="integer" parameterType="string">
-	select count(*) from TBL_USER WHERE USERNAME = #{username}
+<select id="selectByUsername" resultType="com.mari.shop.domain.User" parameterType="string">
+	select * from TBL_USER WHERE USERNAME = #{username}
 </select>
 </mapper>

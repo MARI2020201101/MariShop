@@ -17,9 +17,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.mari.shop.mapper.UserMapper;
+import com.mari.shop.security.CustomUserDetailsService;
 
 import lombok.extern.java.Log;
 
@@ -89,6 +91,15 @@ public class DBTests {
 	public void countTest() throws Exception {
 		int result = userMapper.count();
 		System.out.println("UserMapper count()" + result);
+	}
+	
+	@Autowired
+	CustomUserDetailsService service;
+	
+	@Test
+	public void loadUserbyUsernameTest() {
+		UserDetails user =service.loadUserByUsername("mari");
+		log.info(user.toString());
 	}
 
 }

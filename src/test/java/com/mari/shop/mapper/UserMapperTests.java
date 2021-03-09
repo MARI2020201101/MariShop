@@ -10,7 +10,7 @@ import lombok.extern.java.Log;
 
 @Log
 @RunWith(SpringRunner.class)
-@SpringBootTest
+//@SpringBootTest
 public class UserMapperTests {
 	
 	@Autowired

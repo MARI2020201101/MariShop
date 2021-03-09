@@ -1,6 +1,7 @@
 package com.mari.shop.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 public class UserRestController {
 	private final UserService userService;
 	
-	@PostMapping("/idCheck")
+	@PostMapping(value= "/idCheck")
 	public ResponseEntity<String> idCheck(@RequestBody String username) throws Exception {
 		System.out.println("idcheck-----------------------------");
-		System.out.println(username);
-		if(username==null) {
+		System.out.println("idChecked username: " +username);
+		if(username==null||username=="") {
 			return new ResponseEntity<String>("닉네임을 입력해 주십시요",HttpStatus.BAD_REQUEST);
 		}
 		userService.idCheck(username);	

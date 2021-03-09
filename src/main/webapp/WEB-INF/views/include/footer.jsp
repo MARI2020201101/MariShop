@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <br>
 <footer>
 	<div class="jumbotron text-center" style="margin-bottom:0; padding-top: 15px;padding-bottom: 5px;">
-	  <p>´ëÇ¥ : Mari</p>
-	  <p>´ëÇ¥¹øÈ£ : 000-0000-0000</p>
-	  <p>ÀÌ¸ŞÀÏ : mari20201101@gmail.com</p>
+	  <p>ëŒ€í‘œ : Mari</p>
+	  <p>ëŒ€í‘œë²ˆí˜¸ : 000-0000-0000</p>
+	  <p>ì´ë©”ì¼ : mari20201101@gmail.com</p>
 	</div>
 </footer>

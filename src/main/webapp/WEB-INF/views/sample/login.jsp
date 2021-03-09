@@ -18,13 +18,10 @@
   </style>
 </head>
 <body>
-<%@ include file= "include/header.jsp" %>
-<%@ include file= "include/nav.jsp" %>
+
 <div class ="container">
-	<div>
-		<h3><c:out value="${error}" /></h3>
-	</div>
-	<form action="/login" method="post">
+	
+	<form action="/sample/login" method="post">
 	  <div class="form-group">
 	    <label for="username">회원 아이디:</label>
 	    <input type="text" class="form-control" placeholder="Enter Username" id="username" name="username">
@@ -41,6 +38,6 @@
 	  <button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 </div>
-<%@ include file= "include/footer.jsp" %>
+
 </body>
 </html>

@@ -14,5 +14,5 @@ public interface UserMapper {
 
 	public User selectByUsernameAndPassword(String username, String password);
 	
-	public Integer selectByUsername(String username);
+	public User selectByUsername(String username);
 }

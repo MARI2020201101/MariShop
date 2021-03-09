@@ -5,10 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class User {
 	private Long userId;
 	private String username;
@@ -17,6 +18,6 @@ public class User {
 	private String address1;
 	private String address2;
 	private String phone;
-	private Role role;
+	private String role;
 
 }

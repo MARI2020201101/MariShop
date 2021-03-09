@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <header>
-	<div class="float-right"><!-- È¸¿ø¸Þ´º start -->
-		<a href="/login" class="btn btn-link btn-sm" role="button">·Î±×ÀÎ</a>
-		<a href="/register" class="btn btn-link btn-sm" role="button">È¸¿ø°¡ÀÔ</a>
-		<a href="#" class="btn btn-link btn-sm" role="button">¸¶ÀÌÆäÀÌÁö</a>
-	</div><!-- È¸¿ø¸Þ´º end  -->
+	<div class="float-right"><!-- íšŒì›ë©”ë‰´ start -->
+		<a href="/login" class="btn btn-link btn-sm" role="button">ë¡œê·¸ì¸</a>
+		<a href="/register" class="btn btn-link btn-sm" role="button">íšŒì›ê°€ìž…</a>
+		<a href="#" class="btn btn-link btn-sm" role="button">ë§ˆì´íŽ˜ì´ì§€</a>
+	</div><!-- íšŒì›ë©”ë‰´ end  -->
 <div class="jumbotron text-center" style="margin-bottom:0">
   <h1>Mari's ToyShop</h1>
-  <p>·¯ºí¸® Å¥Æ® ¸¶¸® ÀÎÇü°¡°Ô¿¡ ¿À½Å °ÍÀ» È¯¿µÇÕ´Ï´Ù!</p> 
+  <p>ëŸ¬ë¸”ë¦¬ ííŠ¸ ë§ˆë¦¬ ì¸í˜•ê°€ê²Œì— ì˜¤ì‹  ê²ƒì„ í™˜ì˜í•©ë‹ˆë‹¤!</p> 
 </div>
 </header>
