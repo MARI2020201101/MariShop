@@ -1,5 +1,7 @@
 package com.mari.shop.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.mari.shop.domain.User;
@@ -15,4 +17,8 @@ public interface UserMapper {
 	public User selectByUsernameAndPassword(String username, String password);
 	
 	public User selectByUsername(String username);
+	
+	public List<User> selectAll();
+	
+	public int delete(Long userId);
 }

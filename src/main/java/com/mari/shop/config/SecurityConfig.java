@@ -16,7 +16,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
+import com.mari.shop.aop.CustomAccessDeniedHandler;
 import com.mari.shop.domain.Role;
 import com.mari.shop.domain.User;
 import com.mari.shop.mapper.UserMapper;
@@ -39,11 +41,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/**").permitAll();
-		http.formLogin().loginPage("/login").loginProcessingUrl("/login")
-			.defaultSuccessUrl("/");
+			.antMatchers("/admin/**").hasAuthority("ADMIN")
+			.antMatchers("/**").permitAll()
+			
+			.and()
+			.formLogin().loginPage("/login").loginProcessingUrl("/login")
+			.defaultSuccessUrl("/")
+			.failureUrl("/login?error=true")
+		
+			.and()
+			.exceptionHandling().accessDeniedHandler(accessDenied())
+			
+			.and()
+			.logout()
+			.logoutUrl("/logout").invalidateHttpSession(true);
+
 	}
-	
+	@Bean
+	public AccessDeniedHandler accessDenied() {
+		return new CustomAccessDeniedHandler();
+	}
 	@Bean
 	public PasswordEncoder passwordEncode() {
 		return new BCryptPasswordEncoder();

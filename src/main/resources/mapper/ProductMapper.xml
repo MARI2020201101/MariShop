@@ -3,15 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.mari.shop.mapper.UserMapper">
+<mapper namespace="com.mari.shop.mapper.ProductMapper">
 
 <select id="count" resultType="int">
     select count(*) from TBL_USER
 </select>
 
-<select id="selectAll" resultType="com.mari.shop.domain.User">
-    select user_id as "userId",
-    		U.* from TBL_USER U
+<select id="selectAll" resultType="com.mari.shop.domain.Product">
+    select * from TBL_PRODUCT
 </select>
 
 <delete id="delete">

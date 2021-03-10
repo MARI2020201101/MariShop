@@ -1,8 +1,6 @@
 package com.mari.shop.config;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -20,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.mari.shop.mapper.ProductMapper;
 import com.mari.shop.mapper.UserMapper;
 import com.mari.shop.security.CustomUserDetailsService;
 
@@ -87,6 +86,9 @@ public class DBTests {
 	@Autowired
 	UserMapper userMapper;
 	
+	@Autowired
+	ProductMapper productMapper;
+	
 	@Test
 	public void countTest() throws Exception {
 		int result = userMapper.count();
@@ -96,10 +98,26 @@ public class DBTests {
 	@Autowired
 	CustomUserDetailsService service;
 	
-	@Test
+	
 	public void loadUserbyUsernameTest() {
 		UserDetails user =service.loadUserByUsername("mari");
 		log.info(user.toString());
 	}
 
+	@Test
+	public void selectAllTest() throws Exception {
+		userMapper.selectAll();
+		System.out.println("UserMapper selectAll");
+	}
+	
+	public void deleteTest() throws Exception {
+		//userMapper.delete(4);
+		System.out.println("UserMapper Delete");
+	}
+	
+	@Test
+	public void selectAllProductTest() throws Exception {
+		productMapper.selectAll();
+		System.out.println("==================productMapper selectAll================");
+	}
 }
