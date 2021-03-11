@@ -5,37 +5,25 @@
   
 <mapper namespace="com.mari.shop.mapper.ProductMapper">
 
-<select id="count" resultType="int">
-    select count(*) from TBL_USER
-</select>
+	<resultMap type="com.mari.shop.domain.Product" id="productMap">
+		<id column="PRODUCT_ID" property="productId"/>
+		<result column="DETAIL" property="detail"/>
+		<result column="IMG" property="img"/>
+		<result column="PRICE" property="price"/>
+		<result column="PRODUCT_NAME" property="productName"/>
+		<result column="STOCK" property="stock"/>
+		<result column="CATEGORY_ID" property="categoryId"/>
+	</resultMap>
 
-<select id="selectAll" resultType="com.mari.shop.domain.Product">
+<select id="selectAll" resultMap="productMap">
     select * from TBL_PRODUCT
 </select>
 
-<delete id="delete">
-	delete TBL_USER where USER_ID = #{userId}
-</delete>
-<insert id="insert" parameterType="com.mari.shop.model.RegisterModel">
-<selectKey >
-</selectKey>
-	insert into TBL_USER(USER_ID,ADDRESS1,ADDRESS2,EMAIL,PASSWORD,PHONE,ROLE,USERNAME) 
-	VALUES(
-		HIBERNATE_SEQUENCE.NEXTVAL,
-		#{address1},
-		#{address2},
-		#{email},
-		#{password},
-		#{phone},
-		'USER',
-		#{username}
-	)
-</insert>
-
-<select id="selectByUsernameAndPassword" resultType="com.mari.shop.domain.User" parameterType="string">
-	select * from TBL_USER WHERE USERNAME = #{username} and PASSWORD = #{password}
+<select id="selectByCategoryId" resultMap="productMap" parameterType="long">
+	select * from TBL_PRODUCT WHERE CATEGORY_ID = #{categoryId}
 </select>
-<select id="selectByUsername" resultType="com.mari.shop.domain.User" parameterType="string">
-	select * from TBL_USER WHERE USERNAME = #{username}
+
+<select id="selectByProductId" resultMap="productMap" parameterType="long">
+	select * from TBL_PRODUCT WHERE PRODUCT_ID = #{productId}
 </select>
 </mapper>

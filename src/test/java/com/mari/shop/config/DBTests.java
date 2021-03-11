@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -27,6 +28,7 @@ import lombok.extern.java.Log;
 @Log
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@PropertySource("classpath:/application.properties")
 public class DBTests {
 	@Autowired
 	private DataSource ds;
@@ -104,7 +106,7 @@ public class DBTests {
 		log.info(user.toString());
 	}
 
-	@Test
+	
 	public void selectAllTest() throws Exception {
 		userMapper.selectAll();
 		System.out.println("UserMapper selectAll");
@@ -115,9 +117,20 @@ public class DBTests {
 		System.out.println("UserMapper Delete");
 	}
 	
-	@Test
+	
 	public void selectAllProductTest() throws Exception {
 		productMapper.selectAll();
 		System.out.println("==================productMapper selectAll================");
 	}
+	
+	
+	public void selectProductByCategoryTest() throws Exception {
+		System.out.println("==================productMapper selectByCategory================");
+		productMapper.selectByCategoryId(1L);
+		
+	}
+	@Test
+	public void selectProductByIdTest() throws Exception {
+		System.out.println("==================productMapper selectById================");
+		productMapper.selectByProductId(1L);}
 }

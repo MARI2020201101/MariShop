@@ -19,24 +19,21 @@
   </style>
 </head>
 <body>
-<%@ include file= "include/header.jsp" %>
-<%@ include file= "include/nav.jsp" %>
-<div class="container " style="margin-top:30px">
-<h2>전체상품</h2>
- <div class="row justify-content-center">
-<c:forEach var="product" items ="${productList }">
-   <div class="col-sm-3" style="margin:10px">  
-  		<div class="card style="width:100%" >
-	    <img class="card-img-top" src="images/rainbow.png" alt="Card image" >
-   		<div class="card-body">
-      	<h4 class="card-title">${product.productName }</h4>
-      	<p class="card-text">${product.price }</p>
-    	</div>
- 	 </div>     
-    </div><!-- col end -->
-</c:forEach>
-  </div><!-- row end -->
+<%@ include file= "../include/header.jsp" %>
+<%@ include file= "../include/nav.jsp" %>
+<div class="container" style="margin-top:30px">
+<h2>${product.productName }</h2>
+  <div class="row">
+    <div class="col-sm">
+      <p><img class="card-img-top" src="images/rainbow.png" alt="Card image" ></p>
+    </div>
+    <div class="col-sm">
+      <p>${product.price } 원</p>
+    </div>
+
+  </div>
+  <p>${product.detail }</p>
 </div>
-<%@ include file= "include/footer.jsp" %>
+<%@ include file= "../include/footer.jsp" %>
 </body>
 </html>

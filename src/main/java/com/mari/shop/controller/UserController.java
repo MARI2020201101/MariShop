@@ -1,16 +1,19 @@
 package com.mari.shop.controller;
 
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mari.shop.domain.Product;
 import com.mari.shop.model.RegisterModel;
 import com.mari.shop.security.CustomUserDetails;
 import com.mari.shop.security.CustomUserDetailsService;
+import com.mari.shop.service.ProductService;
 import com.mari.shop.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,10 +25,12 @@ import lombok.extern.java.Log;
 public class UserController {
 	private final UserService userService;
 	private final CustomUserDetailsService userDetailsService;
+	private final ProductService productService;
 
 	@GetMapping("/")
-	public String index() {
-		
+	public String index(Model model) {
+		List<Product> productList = productService.selectAll();
+		model.addAttribute("productList",productList);
 		return "index";
 	}
 	@GetMapping("/login")
