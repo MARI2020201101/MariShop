@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.mari.shop.domain.Product;
 import com.mari.shop.mapper.ProductMapper;
+import com.mari.shop.model.NewProductModel;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +25,18 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public Product selectByProductId(Long productId) {
 		return productMapper.selectByProductId(productId);
+	}
+	@Override
+	public int delete(Long productId) {
+		return productMapper.delete(productId);
+	}
+	@Override
+	public int update(Product product) {
+		return productMapper.update(product);
+	}
+	@Override
+	public int insert(NewProductModel product) {
+		return productMapper.insert(product);
 	}
 
 }

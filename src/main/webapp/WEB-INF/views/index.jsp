@@ -24,16 +24,20 @@
 <div class="container " style="margin-top:30px">
 <h2>전체상품</h2>
  <div class="row justify-content-center">
+ 
 <c:forEach var="product" items ="${productList }">
    <div class="col-sm-3" style="margin:10px">  
   		<div class="card style="width:100%" >
-	    <img class="card-img-top" src="images/rainbow.png" alt="Card image" >
+  		<a href="/product/detail?productId=${product.productId}">
+	    <img class="card-img-top" src="images/rainbow.png" alt="Card image" ></a>
    		<div class="card-body">
-      	<h4 class="card-title">${product.productName }</h4>
+   		<a href="/product/detail?productId=${product.productId}">
+      	<h4 class="card-title">${product.productName }</h4></a>
       	<p class="card-text">${product.price }</p>
     	</div>
  	 </div>     
     </div><!-- col end -->
+    <input type="text" name="productId" hidden= "true" value="${product.productId }">
 </c:forEach>
   </div><!-- row end -->
 </div>

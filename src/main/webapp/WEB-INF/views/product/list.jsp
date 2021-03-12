@@ -24,14 +24,16 @@
 <div class="container " style="margin-top:30px">
 <h2>인형들</h2>
 
- <a href="/product/detail">
+
  <div class="row justify-content-center">
 <c:forEach var="product" items ="${productList }">
    <div class="col-sm-3" style="margin:10px" id="detail">  
   		<div class="card style="width:100%" >
-	    <img class="card-img-top" src="images/rainbow.png" alt="Card image">
+  		<a href="/product/detail?productId=${product.productId}">
+	    <img class="card-img-top" src="images/rainbow.png" alt="Card image"></a>
    		<div class="card-body">
-      	<h4 class="card-title" id="productName" >${product.productName }</h4>
+      	<a href="/product/detail?productId=${product.productId}">
+      	<h4 class="card-title" id="productName" >${product.productName }</h4></a>
       	<p class="card-text">${product.price } 원</p>
     	</div>
  	 </div>     
@@ -47,11 +49,7 @@
 </body>
 <script>
 
-$("#detail").on("click",function(e){
-	e.preventDefault();
-	var productName = $("#productName").text();
-	console.log(productName);
-});
+
 </script>
 
 </html>

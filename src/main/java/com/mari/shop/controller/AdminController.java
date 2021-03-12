@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mari.shop.domain.Product;
 import com.mari.shop.domain.User;
+import com.mari.shop.model.NewProductModel;
 import com.mari.shop.service.AdminService;
+import com.mari.shop.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -22,6 +25,7 @@ import lombok.extern.java.Log;
 public class AdminController {
 	
 	private final AdminService adminService;
+	private final ProductService productService;
 	
 	@GetMapping("/")
 	public String index() {
@@ -45,5 +49,52 @@ public class AdminController {
 		return "redirect:/admin/manageUser";
 			
 	}
-
+	@GetMapping("/manageProduct")
+	public String manageProduct(Model model) {
+		log.info("---------------------------------manageProduct");
+		List<Product> productList = productService.selectAll();
+		model.addAttribute("productList",productList);
+		return "/admin/manageProduct";
+	}
+	@GetMapping("/updateProduct")
+	public String updateProduct(Model model, Long productId) {
+		Product product = productService.selectByProductId(productId);
+		model.addAttribute("product",product);
+		return "/admin/updateProduct";
+	}
+	
+	@PostMapping("/updateProduct")
+	public String updateProduct(RedirectAttributes rttr, Product product) {
+		int result = productService.update(product);
+		if(result!=0) {
+			rttr.addFlashAttribute("result","수정성공");
+			return "redirect:/admin/manageProduct"; }
+		else { rttr.addFlashAttribute("result","수정실패");
+				return "redirect:/admin/manageProduct";}
+	}
+	@PostMapping("/deleteProduct")
+	public String deleteProduct(RedirectAttributes rttr, Long productId) {
+		log.info("--------------------------------------deleteProduct");
+		int result = productService.delete(productId);
+		if(result!=0) {
+			rttr.addFlashAttribute("result","삭제성공");
+			return "redirect:/admin/manageProduct"; }
+		else { rttr.addFlashAttribute("result","삭제실패");
+				return "redirect:/admin/manageProduct";}
+	}
+	
+	@GetMapping("/insertProduct")
+	public String insertProductForm() {
+		return "/admin/insertProduct";
+	}
+	
+	@PostMapping("/insertProduct")
+	public String insertProduct(NewProductModel product , RedirectAttributes rttr) {
+		int result = productService.insert(product);
+		if(result!=0) {
+			rttr.addFlashAttribute("result","등록성공");
+			return "redirect:/admin/manageProduct"; }
+		else { rttr.addFlashAttribute("result","등록실패");
+				return "redirect:/admin/manageProduct";}
+	}
 }

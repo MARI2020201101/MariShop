@@ -16,7 +16,7 @@
 	</resultMap>
 
 <select id="selectAll" resultMap="productMap">
-    select * from TBL_PRODUCT
+    select * from TBL_PRODUCT ORDER BY PRODUCT_ID ASC
 </select>
 
 <select id="selectByCategoryId" resultMap="productMap" parameterType="long">
@@ -26,4 +26,33 @@
 <select id="selectByProductId" resultMap="productMap" parameterType="long">
 	select * from TBL_PRODUCT WHERE PRODUCT_ID = #{productId}
 </select>
+
+<delete id="delete" parameterType ="long">
+ 	delete FROM TBL_PRODUCT WHERE PRODUCT_ID = #{productId}
+</delete>
+
+<insert id="insert" parameterType ="com.mari.shop.model.NewProductModel">
+	insert into TBL_PRODUCT(PRODUCT_ID,DETAIL,IMG,PRICE,PRODUCT_NAME,STOCK,CATEGORY_ID) 
+		values (
+		PRODUCT_SEQ.NEXTVAL,
+		#{detail},
+		#{img},
+		#{price},
+		#{productName},
+		#{stock},
+		#{categoryId}
+		)
+</insert>
+<update id="update" parameterType="com.mari.shop.domain.Product">
+	update TBL_PRODUCT set
+		DETAIL = #{detail},
+		IMG = #{img},
+		PRICE = #{price},
+		PRODUCT_NAME = #{productName},
+		STOCK = #{stock},
+		CATEGORY_ID = #{categoryId}
+		WHERE PRODUCT_ID =#{productId}
+</update>
+
+
 </mapper>

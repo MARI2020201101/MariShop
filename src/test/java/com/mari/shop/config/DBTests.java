@@ -19,8 +19,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.mari.shop.domain.Product;
 import com.mari.shop.mapper.ProductMapper;
 import com.mari.shop.mapper.UserMapper;
+import com.mari.shop.model.NewProductModel;
 import com.mari.shop.security.CustomUserDetailsService;
 
 import lombok.extern.java.Log;
@@ -129,8 +131,44 @@ public class DBTests {
 		productMapper.selectByCategoryId(1L);
 		
 	}
-	@Test
+	
 	public void selectProductByIdTest() throws Exception {
 		System.out.println("==================productMapper selectById================");
 		productMapper.selectByProductId(1L);}
+	
+	
+	public void deleteProductTest() throws Exception {
+		System.out.println("==================productMapper deleteById================");
+		int result= productMapper.delete(2L);
+		log.info("=========delete result : "+ result);
+		}
+	
+	public void insertProductTest() throws Exception {
+		System.out.println("==================productMapper insert ================");
+		NewProductModel npro = NewProductModel.builder()
+												.categoryId(2L)
+												.detail("detail insert test")
+												.img("img~~")
+												.price(13000)
+												.productName("test 인형")
+												.stock(29)
+												.build();
+		int result= productMapper.insert(npro);
+		log.info("=========insert result : "+ result);
+		}
+	@Test
+	public void updateProductTest() throws Exception {
+		System.out.println("==================updateMapper insert ================");
+		Product pro = Product.builder()
+												.categoryId(2L)
+												.detail("detail insert test")
+												.img("img~~")
+												.price(99000)
+												.productName("test 인형")
+												.stock(29)
+												.productId(1L)
+												.build();
+		int result= productMapper.update(pro);
+		log.info("=========insert result : "+ result);
+		}
 }

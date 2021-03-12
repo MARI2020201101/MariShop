@@ -23,6 +23,10 @@ public class ProductController {
 	
 	@GetMapping("/")
 	public String listByCategory(Model model, Long categoryId) {
+		System.out.println("======================listcategory==================");
+		if(categoryId==null) {
+			return "redirect:/";
+		}
 		List<Product> productList = productService.selectByCategoryId(categoryId);
 		model.addAttribute("productList", productList);
 		return "/product/list";
@@ -30,6 +34,7 @@ public class ProductController {
 	
 	@GetMapping("/detail")
 	public String listByProductId(Model model, Long productId) {
+		System.out.println("======================list detail===================");
 		Product product = productService.selectByProductId(productId);
 		model.addAttribute("product",product);
 		return "/product/detail";
