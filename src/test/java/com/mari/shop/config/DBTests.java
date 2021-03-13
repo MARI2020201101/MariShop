@@ -23,6 +23,7 @@ import com.mari.shop.domain.Product;
 import com.mari.shop.mapper.ProductMapper;
 import com.mari.shop.mapper.UserMapper;
 import com.mari.shop.model.NewProductModel;
+import com.mari.shop.model.PageObject;
 import com.mari.shop.security.CustomUserDetailsService;
 
 import lombok.extern.java.Log;
@@ -93,7 +94,7 @@ public class DBTests {
 	@Autowired
 	ProductMapper productMapper;
 	
-	@Test
+	
 	public void countTest() throws Exception {
 		int result = userMapper.count();
 		System.out.println("UserMapper count()" + result);
@@ -156,7 +157,7 @@ public class DBTests {
 		int result= productMapper.insert(npro);
 		log.info("=========insert result : "+ result);
 		}
-	@Test
+	
 	public void updateProductTest() throws Exception {
 		System.out.println("==================updateMapper insert ================");
 		Product pro = Product.builder()
@@ -171,4 +172,14 @@ public class DBTests {
 		int result= productMapper.update(pro);
 		log.info("=========insert result : "+ result);
 		}
+	@Test
+	public void pageTest() throws Exception{
+		log.info("========pageTest1==========");
+		PageObject pageObject = new PageObject(productMapper.countAll(),2);
+		productMapper.selectWithPage(pageObject);
+	}
+	
+	public void countProTest() throws Exception{
+		productMapper.countAll();
+	}
 }

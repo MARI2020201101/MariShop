@@ -63,4 +63,9 @@
 </div>
 <%@ include file= "../include/footer.jsp" %>
 </body>
+<c:if test="${not empty result}">
+<script>
+
+</script>
+</c:if>
 </html>

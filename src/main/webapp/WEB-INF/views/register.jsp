@@ -52,7 +52,7 @@
 </div>
 <%@ include file= "include/footer.jsp" %>
 </body>
-</html>
+
 <script>
 var idCheck = $("#id-check");
 var checked = false;
@@ -89,3 +89,4 @@ $("#reg-btn").on("click", function(e){
 	else $("form").submit();
 });
 </script>
+</html>

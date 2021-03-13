@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.mari.shop.domain.Product;
 import com.mari.shop.model.NewProductModel;
+import com.mari.shop.model.PageObject;
 
 
 public interface ProductService {
@@ -19,5 +20,9 @@ public interface ProductService {
 	public int update(Product product);
 	
 	public int insert(NewProductModel product);
+	
+	public List<Product> selectWithPage(PageObject pageObject);
+	
+	public int countAll();
 
 }

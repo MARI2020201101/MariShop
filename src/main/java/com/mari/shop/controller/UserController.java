@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mari.shop.domain.Product;
+import com.mari.shop.model.PageObject;
 import com.mari.shop.model.RegisterModel;
 import com.mari.shop.security.CustomUserDetails;
 import com.mari.shop.security.CustomUserDetailsService;
@@ -28,8 +29,11 @@ public class UserController {
 	private final ProductService productService;
 
 	@GetMapping("/")
-	public String index(Model model) {
-		List<Product> productList = productService.selectAll();
+	public String index(Model model, @RequestParam(defaultValue = "1")int currPage) {
+		int totalCnt = productService.countAll();
+		PageObject pageObject = new PageObject(totalCnt, currPage);
+		List<Product> productList = productService.selectWithPage(pageObject);
+		model.addAttribute("pageObject",pageObject);
 		model.addAttribute("productList",productList);
 		return "index";
 	}

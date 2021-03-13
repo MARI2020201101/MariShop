@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.mari.shop.domain.Product;
 import com.mari.shop.model.NewProductModel;
+import com.mari.shop.model.PageObject;
 
 @Mapper
 public interface ProductMapper {
@@ -21,4 +22,8 @@ public interface ProductMapper {
 	public int insert(NewProductModel product);
 	
 	public int update(Product product);
+	
+	public List<Product> selectWithPage(PageObject pageObject);
+	
+	public int countAll();
 }
