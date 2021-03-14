@@ -23,14 +23,15 @@
 <%@ include file= "include/nav.jsp" %>
 	<div class="container " style="margin-top: 30px">
 		<h2>전체상품</h2>
+		<form id="move" action="/" method="get">
 		<div class="row justify-content-center">
 			<c:forEach var="product" items="${productList }">
 				<div class="col-sm-3" style="margin: 10px">
-					<div class="card style="width:100%" >
-						<a href="/product/detail?productId=${product.productId}"> <img
+					<div class="card" style="width:100%" >
+						<a href="${product.productId}"> <img
 							class="card-img-top" src="images/rainbow.png" alt="Card image"></a>
 						<div class="card-body">
-							<a href="/product/detail?productId=${product.productId}">
+							<a href="${product.productId}">
 								<h4 class="card-title">${product.productName }</h4>
 							</a>
 							<p class="card-text">${product.price }</p>
@@ -45,19 +46,19 @@
 		<!-- row end -->
 
 		<h3>${pageObject }</h3>
-		<form id="move" action="/" method="get">
+		
+		<input type ="hidden" name="currPage">
 			<nav aria-label="Page navigation">
 				<ul class="pagination justify-content-end">
-					<li class="page-item ${pageObject.prevPage? '':disabled }" name="currPage"
-						value =${pageObject.startPage-1 }><a
-						class="page-link" >Previous</a></li>
-					<c:forEach var="page" begin="${pageObject.startPage }"
+					<li class="page-item ${pageObject.prevPage? "":"disabled" }"><a
+						class="page-link" href ="${pageObject.startPage-1 }">Previous</a></li>
+					<c:forEach var="page" begin="${pageObject.startPage }" 
 						end="${pageObject.endPage }">
-						<li class="page-item ${page==pageObject.currPage? active: '' }" name="currPage"><a
-							class="page-link" >${page }</a></li>
+						<li class="page-item ${page==pageObject.currPage? "active" : "" }" >
+						<a class="page-link" href="${page }">${page }</a></li>
 					</c:forEach>
-					<li class="page-item ${pageObject.nextPage? '':disabled }" name="currPage"><a
-						class="page-link" >Next</a></li>
+					<li class="page-item ${pageObject.nextPage? "":"disabled" }" name="currPage"><a
+						class="page-link" href ="${pageObject.endPage-1 }">Next</a></li>
 				</ul>
 			</nav>
 		</form>
@@ -66,10 +67,24 @@
 </body>
 <script>
  var move =$("#move");
- $("#currPage").on("click",function(e){
+ $(".page-link").on("click",function(e){
+	 var page= $(this);
 	 e.preventDefault();
 	 console.log(move);
-	 })
+	 console.log(page.attr("href"));
+	 var href = page.attr("href");
+	 move.find("input[name='currPage']").val(href);
+	 move.submit();
+	 });
+ $("div.card").on("click", function(e){
+	 e.preventDefault();
+	 console.log(this);
+	 var detail = $(this);
+	 console.log( move.attr("action"));
+	 move.attr("action","/product/detail");
+	 move.append("<input type = 'hidden' name ='productId' value = '" + detail.attr("href") +"'>");
+	 console.log(move);
+	 });
  
 </script>
 </html>
