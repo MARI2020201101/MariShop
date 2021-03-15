@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mari.shop.domain.Product;
+import com.mari.shop.model.Criteria;
 import com.mari.shop.model.PageObject;
 import com.mari.shop.model.RegisterModel;
 import com.mari.shop.security.CustomUserDetails;
@@ -29,13 +30,25 @@ public class UserController {
 	private final ProductService productService;
 
 	@GetMapping("/")
-	public String index(Model model, @RequestParam(defaultValue = "1")int currPage) {
-		int totalCnt = productService.countAll();
-		PageObject pageObject = new PageObject(totalCnt, currPage);
-		List<Product> productList = productService.selectWithPage(pageObject);
-		model.addAttribute("pageObject",pageObject);
-		model.addAttribute("productList",productList);
+	public String index(Model model, Long categoryId ,@RequestParam(defaultValue = "1")int currPage) {
+		
+		if(categoryId==null) {
+			Criteria cri = new Criteria();
+			int totalCnt = productService.countAll(cri);
+			PageObject pageObject = new PageObject(totalCnt, currPage, cri);
+			List<Product> productList = productService.selectByCategoryIdWithPage(pageObject);
+			model.addAttribute("pageObject",pageObject);
+			model.addAttribute("productList",productList);
+			return "index";
+		}
+		Criteria cri = new Criteria(categoryId);
+		int totalCnt = productService.countAll(cri);
+		PageObject pageObject = new PageObject(totalCnt, currPage, cri);
+		List<Product> productList = productService.selectByCategoryIdWithPage(pageObject);
+		model.addAttribute("productList", productList);
+		model.addAttribute("pageObject", pageObject);
 		return "index";
+		
 	}
 	@GetMapping("/login")
 	public String loginForm(@RequestParam(required = false) String error,@RequestParam(required = false)String logout, Model model) {

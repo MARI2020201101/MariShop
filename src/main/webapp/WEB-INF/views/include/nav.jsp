@@ -9,13 +9,13 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="/product?categoryId=1">대형인형</a>
+        <a class="nav-link" href="/?categoryId=1">대형인형</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/product?categoryId=2">곰인형</a>
+        <a class="nav-link" href="/?categoryId=2">곰인형</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/product?categoryId=3">인형</a>
+        <a class="nav-link" href="/?categoryId=3">인형</a>
       </li>    
     </ul >
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

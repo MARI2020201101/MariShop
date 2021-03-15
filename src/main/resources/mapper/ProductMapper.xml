@@ -57,13 +57,38 @@
 <select id="selectWithPage" parameterType="com.mari.shop.model.PageObject" resultMap="productMap" >
 	<![CDATA[SELECT * FROM 
 	 (select T.*,
-	 ROWNUM RN from tbl_product T ORDER BY PRODUCT_ID DESC) 
+	 ROWNUM RN from tbl_product T 
+	 
+	 
+	 ORDER BY PRODUCT_ID DESC) 
 	 WHERE 
 	 RN<= #{currPage}*#{criCnt} AND RN > (#{currPage}-1)*#{criCnt}
 	  ]]>
 </select>
-<select id="countAll" resultType = "int">
-	select count(PRODUCT_ID) from TBL_PRODUCT
+<select id="countAll" resultType = "int" parameterType ="com.mari.shop.model.Criteria">
+	select count(PRODUCT_ID) from TBL_PRODUCT 
+	<where>
+	<if test = "categoryId != null">
+	CATEGORY_ID = #{categoryId}
+	</if>
+	</where>
+</select>
+
+
+<select id ="selectByCategoryIdWithPage" resultMap="productMap" parameterType ="com.mari.shop.model.PageObject">
+<![CDATA[
+	SELECT * FROM (select T.*,ROWNUM RN from tbl_product T 
+	]]>
+	<where>
+	<if test = "cri.categoryId != null">
+	CATEGORY_ID = #{cri.categoryId}
+	</if>
+	</where>
+	<![CDATA[
+	ORDER BY PRODUCT_ID DESC) 
+	WHERE
+    RN<= #{currPage}*#{criCnt} AND RN > (#{currPage}-1)*#{criCnt}
+      ]]>
 </select>
 
 

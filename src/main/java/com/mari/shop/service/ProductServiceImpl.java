@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.mari.shop.domain.Product;
 import com.mari.shop.mapper.ProductMapper;
+import com.mari.shop.model.Criteria;
 import com.mari.shop.model.NewProductModel;
 import com.mari.shop.model.PageObject;
 
@@ -45,7 +46,15 @@ public class ProductServiceImpl implements ProductService{
 	}
 	@Override
 	public int countAll() {
-		return productMapper.countAll();
+		return 0;
+	}
+	@Override
+	public int countAll(Criteria cri) {
+		return productMapper.countAll(cri);
+	}
+	@Override
+	public List<Product> selectByCategoryIdWithPage(PageObject pageObject) {
+		return productMapper.selectByCategoryIdWithPage(pageObject);
 	}
 
 }

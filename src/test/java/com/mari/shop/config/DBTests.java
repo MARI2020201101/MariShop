@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.mari.shop.domain.Product;
 import com.mari.shop.mapper.ProductMapper;
 import com.mari.shop.mapper.UserMapper;
+import com.mari.shop.model.Criteria;
 import com.mari.shop.model.NewProductModel;
 import com.mari.shop.model.PageObject;
 import com.mari.shop.security.CustomUserDetailsService;
@@ -172,14 +173,19 @@ public class DBTests {
 		int result= productMapper.update(pro);
 		log.info("=========insert result : "+ result);
 		}
-	@Test
-	public void pageTest() throws Exception{
-		log.info("========pageTest1==========");
-		PageObject pageObject = new PageObject(productMapper.countAll(),2);
-		productMapper.selectWithPage(pageObject);
-	}
+	
 	
 	public void countProTest() throws Exception{
-		productMapper.countAll();
+		Criteria cri = new Criteria();
+		productMapper.countAll(cri);
+	}
+	
+	@Test
+	public void pagewithCategoryTest() throws Exception{
+		log.info("-----------------------------------------");
+		Criteria cri = new Criteria(1L);
+		int count = productMapper.countAll(cri);
+		PageObject pageObject = new PageObject(count,1,cri);
+		productMapper.selectByCategoryIdWithPage(pageObject);
 	}
 }

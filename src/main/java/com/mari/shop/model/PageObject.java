@@ -30,10 +30,12 @@ public class PageObject {
 	private boolean nextPage;
 	private int realEndPage;
 	
+	private Criteria cri;
 	
-	public PageObject(int totalCnt, int currPage){
+	public PageObject(int totalCnt, int currPage, Criteria cri){
 		this.totalCnt = totalCnt;
 		this.currPage = currPage;
+		this.cri = cri;
 		realEndPage = (int)Math.ceil(totalCnt/(criCnt*1.0));
 		endPage = (int)Math.ceil(currPage/10.0)*10;
 		endPage = endPage>realEndPage? realEndPage : endPage;

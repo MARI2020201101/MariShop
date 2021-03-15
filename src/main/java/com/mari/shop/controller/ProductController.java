@@ -6,8 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mari.shop.domain.Product;
+import com.mari.shop.model.Criteria;
+import com.mari.shop.model.PageObject;
 import com.mari.shop.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,19 +24,8 @@ public class ProductController {
 
 	private final ProductService productService;
 	
-	@GetMapping("/")
-	public String listByCategory(Model model, Long categoryId) {
-		System.out.println("======================listcategory==================");
-		if(categoryId==null) {
-			return "redirect:/";
-		}
-		List<Product> productList = productService.selectByCategoryId(categoryId);
-		model.addAttribute("productList", productList);
-		return "/product/list";
-	}
-	
 	@GetMapping("/detail")
-	public String listByProductId(Model model, Long productId) {
+	public String listByProductId(Model model, Long productId, @RequestParam(defaultValue = "1")int currPage) {
 		System.out.println("======================list detail===================");
 		Product product = productService.selectByProductId(productId);
 		model.addAttribute("product",product);
