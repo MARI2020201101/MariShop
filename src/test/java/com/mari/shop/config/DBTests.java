@@ -180,7 +180,7 @@ public class DBTests {
 		productMapper.countAll(cri);
 	}
 	
-	@Test
+	
 	public void pagewithCategoryTest() throws Exception{
 		log.info("-----------------------------------------");
 		Criteria cri = new Criteria(1L);
@@ -188,4 +188,14 @@ public class DBTests {
 		PageObject pageObject = new PageObject(count,1,cri);
 		productMapper.selectByCategoryIdWithPage(pageObject);
 	}
+	
+	@Test
+	public void listTest() throws Exception{
+		log.info("-----------------------------------------");
+		Criteria cri = new Criteria(1L,"왕");
+		int count = productMapper.countAll(cri);
+		PageObject pageObject = new PageObject(count,1,cri);
+		productMapper.list(pageObject);
+	}
+			
 }

@@ -56,5 +56,9 @@ public class ProductServiceImpl implements ProductService{
 	public List<Product> selectByCategoryIdWithPage(PageObject pageObject) {
 		return productMapper.selectByCategoryIdWithPage(pageObject);
 	}
+	@Override
+	public List<Product> list(PageObject pageObject) {
+		return productMapper.list(pageObject);
+	}
 
 }

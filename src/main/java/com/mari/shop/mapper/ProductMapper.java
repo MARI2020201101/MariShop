@@ -29,4 +29,6 @@ public interface ProductMapper {
 	public int countAll(Criteria cri);
 	
 	public List<Product> selectByCategoryIdWithPage(PageObject pageObject);
+	
+	public List<Product> list(PageObject pageObject);
 }

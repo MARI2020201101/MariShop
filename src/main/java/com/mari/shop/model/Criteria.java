@@ -9,5 +9,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Criteria {
 	private Long categoryId;
+	private String keyword;
+	
+	public Criteria(Long categoryId) {
+		super();
+		this.categoryId = categoryId;
+	}
 
+	public Criteria(String keyword) {
+		super();
+		this.keyword = keyword;
+	}
+
+	
+	
 }

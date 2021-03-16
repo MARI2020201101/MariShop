@@ -30,25 +30,14 @@ public class UserController {
 	private final ProductService productService;
 
 	@GetMapping("/")
-	public String index(Model model, Long categoryId ,@RequestParam(defaultValue = "1")int currPage) {
-		
-		if(categoryId==null) {
-			Criteria cri = new Criteria();
-			int totalCnt = productService.countAll(cri);
-			PageObject pageObject = new PageObject(totalCnt, currPage, cri);
-			List<Product> productList = productService.selectByCategoryIdWithPage(pageObject);
-			model.addAttribute("pageObject",pageObject);
-			model.addAttribute("productList",productList);
-			return "index";
-		}
-		Criteria cri = new Criteria(categoryId);
+	public String index(Model model, Criteria cri ,@RequestParam(defaultValue = "1")int currPage) {
+		log.info("-------->>\n"+ cri);
 		int totalCnt = productService.countAll(cri);
 		PageObject pageObject = new PageObject(totalCnt, currPage, cri);
 		List<Product> productList = productService.selectByCategoryIdWithPage(pageObject);
-		model.addAttribute("productList", productList);
-		model.addAttribute("pageObject", pageObject);
-		return "index";
-		
+		model.addAttribute("pageObject",pageObject);
+		model.addAttribute("productList",productList);
+			return "index";
 	}
 	@GetMapping("/login")
 	public String loginForm(@RequestParam(required = false) String error,@RequestParam(required = false)String logout, Model model) {
