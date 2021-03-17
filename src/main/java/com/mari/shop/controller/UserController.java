@@ -30,8 +30,8 @@ public class UserController {
 	private final ProductService productService;
 
 	@GetMapping("/")
-	public String index(Model model, Criteria cri ,@RequestParam(defaultValue = "1")int currPage) {
-		log.info("-------->>\n"+ cri);
+	public String index(Model model, Criteria cri, @RequestParam(defaultValue = "1")int currPage) {
+		log.info("-------->>\n\n\n"+ cri);
 		int totalCnt = productService.countAll(cri);
 		PageObject pageObject = new PageObject(totalCnt, currPage, cri);
 		List<Product> productList = productService.selectByCategoryIdWithPage(pageObject);

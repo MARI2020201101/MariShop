@@ -192,9 +192,9 @@ public class DBTests {
 	@Test
 	public void listTest() throws Exception{
 		log.info("-----------------------------------------");
-		Criteria cri = new Criteria(1L,"왕");
+		Criteria cri = new Criteria("teddy");
 		int count = productMapper.countAll(cri);
-		PageObject pageObject = new PageObject(count,1,cri);
+		PageObject pageObject = new PageObject(count,5,cri);
 		productMapper.list(pageObject);
 	}
 			

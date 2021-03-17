@@ -16,7 +16,7 @@ public class OrderItem {
 	 * TOTAL_PRICE NOT NULL NUMBER(10) 
 	 * PRODUCT_ID NUMBER(19)
 	 */
-	private Long orderId;
+	private Long orderItemId;
 	private int count; //주문 아이템 수량
 	private int totalPrice;
 	private Long productId;

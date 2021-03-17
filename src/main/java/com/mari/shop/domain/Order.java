@@ -20,6 +20,6 @@ public class Order {
 	private Long orderId;
 	private String orderDate;
 	private String orderStatus; //comp, yet
-	private int totalPrice;
+	private int totalOrderPrice;
 	private Long userId;
 }

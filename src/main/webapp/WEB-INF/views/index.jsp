@@ -44,23 +44,23 @@
 			<!-- row end -->
 		</form>
 		<h3>${pageObject }</h3>
-		
-		<form class="form-inline" >
-		<select class="form-control" name="type">
-		<option value="" ${PageObject.cri.type==null? "selected":"" }>전체</option>
-		<option value=1 ${PageObject.cri.type eq 1? "selected":"" }>대형인형</option>
-		<option value=2 ${PageObject.cri.type eq 2? "selected":"" }>곰인형</option>
-		<option value=3 ${PageObject.cri.type eq 3? "selected":"" }>인형</option>
+		                                                                            
+		<form class="form-inline" action="/" method="get">
+		<select class="form-control" name="categoryId">
+		<option value="" ${pageObject.cri.categoryId==null? "selected":"" }>전체</option>
+		<option value=1 ${pageObject.cri.categoryId eq 1? "selected":"" }>대형인형</option>
+		<option value=2 ${pageObject.cri.categoryId eq 2? "selected":"" }>곰인형</option>
+		<option value=3 ${pageObject.cri.categoryId eq 3? "selected":"" }>인형</option>
 		</select>
-			<input class="form-control mr-sm-2" type="search" name = "keyword" value="${PageObject.cri.keyword }">
-			<button class="btn btn-success my-2 my-sm-0" type="button" id ="search" >Search</button>
+			<input class="form-control mr-sm-2" id ="keyword" name = "keyword" value="${pageObject.cri.keyword }">
+			<button class="btn btn-success my-2 my-sm-0" type="submit" id ="search" >Search</button>
 		</form> 
 			
 		<form id="move" action="/" method="get">
-			<input type="hidden" name="categoryId"
-				value="${pageObject.cri.categoryId }">
-				 <input type="hidden"
-				name="currPage">
+		<input type ="hidden" name ="totalCnt" value="${pageObject.totalCnt }">
+		<input type ="hidden" name ="keyword" value="${pageObject.cri.keyword }">
+		<input type="hidden" name="categoryId" value="${pageObject.cri.categoryId }">
+		<input type="hidden" name="currPage" >
 			<nav aria-label="Page navigation">
 				<ul class="pagination justify-content-end">
 					<li class="page-item ${pageObject.prevPage? "":"disabled" }"><a
@@ -83,7 +83,7 @@
 <script>
  var move =$("#move");
  var detail = $("detail");
- 
+ var keyword = $("#keyword").val();
  $(".page-link").on("click", function(e){
 	 e.preventDefault();
 	 var page= $(this);
@@ -106,14 +106,5 @@
 	 console.log(h);
 	 $("#detail").submit();
 	 }); 
-
- var search = $("#search");
- 
- search.on("click",function(e){
-	 e.preventDefault();
-	 console.log(search);
-	 
-	 })
- 
 </script>
 </html>

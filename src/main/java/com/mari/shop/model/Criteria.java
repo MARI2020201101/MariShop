@@ -20,7 +20,6 @@ public class Criteria {
 		super();
 		this.keyword = keyword;
 	}
-
 	
 	
 }
