@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -19,11 +21,14 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.mari.shop.domain.OrderItem;
 import com.mari.shop.domain.Product;
+import com.mari.shop.mapper.OrderItemMapper;
 import com.mari.shop.mapper.ProductMapper;
 import com.mari.shop.mapper.UserMapper;
 import com.mari.shop.model.Criteria;
 import com.mari.shop.model.NewProductModel;
+import com.mari.shop.model.OrderItemJoinVO;
 import com.mari.shop.model.PageObject;
 import com.mari.shop.security.CustomUserDetailsService;
 
@@ -189,13 +194,29 @@ public class DBTests {
 		productMapper.selectByCategoryIdWithPage(pageObject);
 	}
 	
-	@Test
+	
 	public void listTest() throws Exception{
 		log.info("-----------------------------------------");
 		Criteria cri = new Criteria("teddy");
 		int count = productMapper.countAll(cri);
 		PageObject pageObject = new PageObject(count,5,cri);
 		productMapper.list(pageObject);
+	}
+	@Autowired
+	OrderItemMapper orderItemMapper;
+	
+	
+	public void orderItemInsertTest() throws Exception{
+		log.info("-------------orderItem Test-----------------");
+		OrderItem orderItem = OrderItem.builder().productId(4L).totalPrice(10000).count(1).userId(28L).build();
+		orderItemMapper.insert(orderItem);
+	}
+	
+	@Test
+	public void orderSelectTest() throws Exception{
+		log.info("-------------orderItem mapper select Test-----------------");
+		List<OrderItemJoinVO> orderItemMap = orderItemMapper.selectWithProduct();
+		log.info("---------------------->>\n\n\n"+orderItemMap.toString());
 	}
 			
 }

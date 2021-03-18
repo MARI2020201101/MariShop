@@ -16,10 +16,12 @@ public class Order {
 	 * ORDER_STATUS VARCHAR2(255 CHAR) 
 	 * TOTAL_PRICE NOT NULL NUMBER(10) 
 	 * USER_ID NUMBER(19)
+	 * ORDER_ITEM_ID NUMBER(19,0)
 	 */    
 	private Long orderId;
 	private String orderDate;
 	private String orderStatus; //comp, yet
 	private int totalOrderPrice;
 	private Long userId;
+	private Long orderItemId;
 }

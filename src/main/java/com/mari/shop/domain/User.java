@@ -11,6 +11,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class User {
+	/*
+	 * 
+	USER_ID	NUMBER(19,0)
+	ADDRESS1	VARCHAR2(255 CHAR)
+	ADDRESS2	VARCHAR2(255 CHAR)
+	EMAIL		VARCHAR2(255 CHAR)
+	PASSWORD	VARCHAR2(255 CHAR)
+	PHONE		VARCHAR2(255 CHAR)
+	ROLE		VARCHAR2(255 CHAR)
+	USERNAME	VARCHAR2(255 CHAR)
+	 */
+	
 	private Long userId;
 	private String username;
 	private String password;
