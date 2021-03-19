@@ -25,9 +25,11 @@ public class ProductController {
 	private final ProductService productService;
 	
 	@GetMapping("/detail")
-	public String listByProductId(Model model, Long productId, @RequestParam(defaultValue = "1")int currPage) {
+	public String listByProductId(Model model, Criteria cri , int totalCnt ,Long productId, @RequestParam(defaultValue = "1")int currPage) {
 		System.out.println("======================list detail===================");
 		Product product = productService.selectByProductId(productId);
+		PageObject pageObject = new PageObject(totalCnt, currPage, cri);
+		model.addAttribute("pageObject",pageObject);
 		model.addAttribute("product",product);
 		return "/product/detail";
 	}

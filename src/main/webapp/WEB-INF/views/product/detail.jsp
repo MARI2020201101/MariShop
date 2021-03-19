@@ -22,10 +22,17 @@
 <%@ include file= "../include/header.jsp" %>
 <%@ include file= "../include/nav.jsp" %>
 <div class="container" style="margin-top:30px">
+<form action="/" method = "get">
+<button class="btn btn-info my-3" type="submit" >목록으로</button>
+				<input type="hidden" name="currPage"
+					value="${ pageObject.currPage }">
+							<input type ="hidden" name ="totalCnt" value="${pageObject.totalCnt }">
+		<input type ="hidden" name ="keyword" value="${pageObject.cri.keyword }">
+		<input type="hidden" name="categoryId" value="${pageObject.cri.categoryId }">
 <h2>${product.productName }</h2>
   <div class="row">
     <div class="col-sm">
-      <p><img class="card-img-top" src="images/rainbow.png" alt="Card image" ></p>
+      <p><img class="card-img-top"  alt="Card image" ></p>
     </div>
     <div class="col-sm">
       <p>${product.price } 원</p>
@@ -33,6 +40,7 @@
 
   </div>
   <p>${product.detail }</p>
+  </form>
 </div>
 <%@ include file= "../include/footer.jsp" %>
 </body>

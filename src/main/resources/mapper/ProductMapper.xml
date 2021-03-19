@@ -98,6 +98,7 @@
 <![CDATA[
 	SELECT * FROM (select T.*,ROWNUM RN from tbl_product T 
 	]]>
+	<if test="cri !=null">
 	<where>
 	<if test = "cri.categoryId != null">
 	CATEGORY_ID = #{cri.categoryId}
@@ -106,6 +107,7 @@
 	AND PRODUCT_NAME like '%'||#{cri.keyword}||'%'
 	</if>
 	</where>
+	</if>
 	<![CDATA[
 	ORDER BY PRODUCT_ID DESC) 
 	WHERE

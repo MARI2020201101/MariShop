@@ -40,6 +40,9 @@
 				</c:forEach>
 				<input type="hidden" name="currPage"
 					value="${ pageObject.currPage }">
+							<input type ="hidden" name ="totalCnt" value="${pageObject.totalCnt }">
+		<input type ="hidden" name ="keyword" value="${pageObject.cri.keyword }">
+		<input type="hidden" name="categoryId" value="${pageObject.cri.categoryId }">
 			</div>
 			<!-- row end -->
 		</form>

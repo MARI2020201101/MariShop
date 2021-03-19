@@ -47,14 +47,23 @@
   insert into TBL_ORDERITEM(ORDER_ITEM_ID,COUNT,TOTAL_PRICE,PRODUCT_ID,USER_ID ) 
   					values(ORDER_ITEM_SEQ.NEXTVAL,#{count},#{totalPrice},#{productId},#{userId})
  </insert>
- <select id ="selectWithProduct" resultMap="itemJoinMap">
- 
- select * from tbl_orderitem o 
-    left outer join tbl_user u on o.user_id = u.user_id
-    left outer join 
-        (select * from tbl_product p left outer join tbl_category c on p.category_id = c.category_id)
-    p on p.product_id = o.product_id
- 
+ <select id ="selectWithProduct" resultMap="itemJoinMap" parameterType ="long">
+ SELECT * FROM TBL_ORDERITEM O 
+LEFT OUTER JOIN TBL_USER U ON O.USER_ID = U.USER_ID 
+,(SELECT * FROM TBL_PRODUCT P LEFT OUTER JOIN TBL_CATEGORY C ON P.CATEGORY_ID = C.CATEGORY_ID)SUB
+WHERE O.PRODUCT_ID = SUB.PRODUCT_ID AND O.USER_ID = #{userId}
  </select>
+ 
+ <delete id ="delete" parameterType ="long">
+ delete from TBL_ORDERITEM where ORDER_ITEM_ID = #{orderItemId}
+ </delete>
+ <update id ="update" parameterType ="com.mari.shop.domain.OrderItem">
+ update TBL_ORDERITEM set
+ 		COUNT = #{count},
+ 		TOTAL_PRICE = #{totalPrice},
+ 		PRODUCT_ID = #{productId}
+ 		where 
+ 		ORDER_ITEM_ID = #{orderItemId} and USER_ID = #{userId}
+ </update>
   
 </mapper>

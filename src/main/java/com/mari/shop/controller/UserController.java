@@ -34,7 +34,7 @@ public class UserController {
 		log.info("-------->>\n\n\n"+ cri);
 		int totalCnt = productService.countAll(cri);
 		PageObject pageObject = new PageObject(totalCnt, currPage, cri);
-		List<Product> productList = productService.selectByCategoryIdWithPage(pageObject);
+		List<Product> productList = productService.list(pageObject);
 		model.addAttribute("pageObject",pageObject);
 		model.addAttribute("productList",productList);
 			return "index";

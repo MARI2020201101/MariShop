@@ -208,15 +208,28 @@ public class DBTests {
 	
 	public void orderItemInsertTest() throws Exception{
 		log.info("-------------orderItem Test-----------------");
-		OrderItem orderItem = OrderItem.builder().productId(4L).totalPrice(10000).count(1).userId(28L).build();
+		OrderItem orderItem = OrderItem.builder().productId(67L).totalPrice(105000).count(1).userId(28L).build();
 		orderItemMapper.insert(orderItem);
 	}
 	
 	@Test
 	public void orderSelectTest() throws Exception{
 		log.info("-------------orderItem mapper select Test-----------------");
-		List<OrderItemJoinVO> orderItemMap = orderItemMapper.selectWithProduct();
+		List<OrderItemJoinVO> orderItemMap = orderItemMapper.selectWithProduct(28L);
 		log.info("---------------------->>\n\n\n"+orderItemMap.toString());
+	}
+	
+	public void orderItemdeleteTest() throws Exception{
+		log.info("-------------orderItem mapper delete Test-----------------");
+		int result = orderItemMapper.delete(1L);
+		log.info("---------------------->>\n\n\n result : \n"+ result);
+	}
+	
+	public void orderItemUpdateTest() throws Exception{
+		log.info("-------------orderItem mapper update Test-----------------");
+		OrderItem orderItem = OrderItem.builder().orderItemId(2L).productId(67L).totalPrice(210000).count(2).userId(28L).build();
+		int result = orderItemMapper.update(orderItem);
+		log.info("---------------------->>\n\n\n result : \n"+ result);
 	}
 			
 }

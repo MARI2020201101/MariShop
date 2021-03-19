@@ -12,5 +12,9 @@ public interface OrderItemMapper {
 
 	public int insert(OrderItem orderItem);
 	
-	public List<OrderItemJoinVO> selectWithProduct();
+	public List<OrderItemJoinVO> selectWithProduct(Long userId);
+	
+	public int delete(Long orderItemId);
+	
+	public int update(OrderItem orderItem);
 }
