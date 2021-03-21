@@ -12,12 +12,12 @@ public class ExceptionHandler {
 	
 	
 	@org.springframework.web.bind.annotation.ExceptionHandler(value = Exception.class)
-	public ResponseEntity<String> handleException(Exception e) {
-		return new ResponseEntity<String>(e.getMessage(),HttpStatus.ACCEPTED); 
+	public ResponseEntity<String> handleGlobalException(Exception e) {
+		return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST); 
 	}
 
 	@org.springframework.web.bind.annotation.ExceptionHandler(value=HttpMessageNotReadableException.class )
 	public ResponseEntity<String> handleRequestBodyException(HttpMessageNotReadableException e){
-		return new ResponseEntity<String>("입력값을 확인해 주십시요..",HttpStatus.ACCEPTED);
+		return new ResponseEntity<String>("입력값을 확인해 주십시요..",HttpStatus.BAD_REQUEST);
 	}
 }

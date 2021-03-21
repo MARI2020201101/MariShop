@@ -34,9 +34,9 @@
 </insert>
 
 <select id="selectByUsernameAndPassword" resultType="com.mari.shop.domain.User" parameterType="string">
-	select * from TBL_USER WHERE USERNAME = #{username} and PASSWORD = #{password}
+	select U.*,user_id as "userId" from TBL_USER U WHERE USERNAME = #{username} and PASSWORD = #{password}
 </select>
 <select id="selectByUsername" resultType="com.mari.shop.domain.User" parameterType="string">
-	select * from TBL_USER WHERE USERNAME = #{username}
+	select U.*,user_id as "userId" from TBL_USER U WHERE USERNAME = #{username}
 </select>
 </mapper>
