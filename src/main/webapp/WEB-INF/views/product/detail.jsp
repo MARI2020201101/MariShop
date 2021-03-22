@@ -8,7 +8,6 @@
 <title>Mari's ToyShop</title>
 <meta charset="utf-8">
 <%@ include file="../js/bootstrap.jsp"%>
-<script src = "/js/items.js"></script>
 </head>
 <body>
 	<%@ include file="../include/header.jsp"%>
@@ -39,10 +38,10 @@
 		<hr>
 		<label for="count">구매 수량 : </label>
 		<select class="form-select form-control" style ="width:100px" id ="count">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
+			<option value=1>1</option>
+			<option value=2>2</option>
+			<option value=3>3</option>
+			<option value=4>4</option>
 		</select> 
 		<input type ="hidden" id ="productId" value="${product.productId}">
 		<input type ="hidden" id ="totalPrice" value="${product.price}">
@@ -51,8 +50,9 @@
 		</sec:authorize>
 		<sec:authorize access="isAuthenticated()">
 		<h3><sec:authentication property="principal" /></h3></sec:authorize>
-		
+		<button type="button" class="btn btn-warning" id="newitem">장바구니 추가</button>
 	</div>
 	<%@ include file="../include/footer.jsp"%>
 </body>
+<script src = "/js/items.js"></script>
 </html>

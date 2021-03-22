@@ -9,7 +9,8 @@
 			<a href="/register" class="btn btn-link btn-sm" role="button">회원가입</a>
 		</sec:authorize>
 		<sec:authorize access="isAuthenticated()">
-			<a href="#" class="btn btn-link btn-sm" role="button">마이페이지</a>
+			<a href="/items" class="btn btn-link btn-sm" role="button">장바구니</a>
+			<a href="/items/<sec:authentication property="principal.user.userId" />" class="btn btn-link btn-sm" role="button">장바구니JSON</a>
 			<a href="/logout" class="btn btn-link btn-sm" role="button">로그아웃</a>
 		</sec:authorize>
 	</div><!-- 회원메뉴 end  -->

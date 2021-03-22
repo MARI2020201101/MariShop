@@ -71,4 +71,9 @@ public class UserController {
 		return "/accessError";
 	}
 	
+	@GetMapping("/items")
+	public String items() {
+		return "/user/items";
+		
+	}
 }
