@@ -71,9 +71,13 @@ public class UserController {
 		return "/accessError";
 	}
 	
-	@GetMapping("/items")
+	@GetMapping("/user/items")
 	public String items() {
 		return "/user/items";
 		
+	}
+	@GetMapping("/user/updateItems")
+	public String updateItems() {
+		return "/user/updateItems";
 	}
 }

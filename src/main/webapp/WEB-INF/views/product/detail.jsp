@@ -30,7 +30,9 @@
 				<div class="col-sm">
 					<p>${product.price }원</p>
 				</div>
-
+<div class="col-sm">
+					<p>재고 : ${product.stock }</p>
+				</div>
 			</div>
 			<p>${product.detail }</p>
 		</form>
