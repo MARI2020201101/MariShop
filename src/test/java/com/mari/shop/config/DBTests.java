@@ -155,7 +155,7 @@ public class DBTests {
 		NewProductModel npro = NewProductModel.builder()
 												.categoryId(2L)
 												.detail("detail insert test")
-												.img("img~~")
+												//.img("img~~")
 												.price(13000)
 												.productName("test 인형")
 												.stock(29)

@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.mari.shop.domain.Product;
 import com.mari.shop.model.Criteria;
-import com.mari.shop.model.NewProductModel;
 import com.mari.shop.model.PageObject;
 
 @Mapper
@@ -20,7 +19,7 @@ public interface ProductMapper {
 	
 	public int delete(Long productId);
 	
-	public int insert(NewProductModel product);
+	public int insert(Product product);
 	
 	public int update(Product product);
 	

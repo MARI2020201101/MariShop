@@ -1,12 +1,17 @@
 package com.mari.shop.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mari.shop.domain.Product;
@@ -17,6 +22,7 @@ import com.mari.shop.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @RequestMapping("/admin/**")
@@ -89,12 +95,48 @@ public class AdminController {
 	}
 	
 	@PostMapping("/insertProduct")
-	public String insertProduct(NewProductModel product , RedirectAttributes rttr) {
+	public String insertProduct(NewProductModel newProduct ,@RequestParam(value="img", required=false) MultipartFile img, RedirectAttributes rttr) {
+		String uploadFolder = "C:/study/upload/";
+		String uploadFilename ="";
+		if(img!=null) {
+		MultipartFile imgFile = img;
+		log.info("----------->>\n\n img info \n");
+		log.info("img.getContentType() :" + img.getContentType());
+		log.info("img.getSize() : " + img.getSize()+"");
+		log.info("img.getOriginalFilename() :" + img.getOriginalFilename());
+		UUID uuid = UUID.randomUUID();
+		uploadFilename = uuid.toString() + "_" + img.getOriginalFilename();
+		File saveFile = new File(uploadFolder,uploadFilename);
+		log.info("saved File name : " + saveFile.getName());
+		log.info("saved File getAbsolutePath : " + saveFile.getAbsolutePath());
+		try {
+			img.transferTo(saveFile);
+			FileOutputStream thumbnail = new FileOutputStream(new File(uploadFolder, "s_" + uploadFilename));
+			Thumbnailator.createThumbnail(imgFile.getInputStream(), thumbnail, 100,100);
+			thumbnail.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		}
+		
+		
+		
+		Product product = Product.builder()
+				.productName(newProduct.getProductName())
+				.categoryId(newProduct.getCategoryId())
+				.detail(newProduct.getDetail())
+				.price(newProduct.getPrice())
+				.stock(newProduct.getStock())
+				.img(uploadFolder+uploadFilename)
+				.build();
+									
 		int result = productService.insert(product);
 		if(result!=0) {
 			rttr.addFlashAttribute("result","등록성공");
-			return "redirect:/admin/manageProduct"; }
+			return "redirect:/admin/insertProduct"; }
 		else { rttr.addFlashAttribute("result","등록실패");
-				return "redirect:/admin/manageProduct";}
+				return "redirect:/admin/insertProduct";
+				
+		}
 	}
 }

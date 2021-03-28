@@ -31,7 +31,7 @@
  	delete FROM TBL_PRODUCT WHERE PRODUCT_ID = #{productId}
 </delete>
 
-<insert id="insert" parameterType ="com.mari.shop.model.NewProductModel">
+<insert id="insert" parameterType ="com.mari.shop.domain.Product">
 	insert into TBL_PRODUCT(PRODUCT_ID,DETAIL,IMG,PRICE,PRODUCT_NAME,STOCK,CATEGORY_ID) 
 		values (
 		PRODUCT_SEQ.NEXTVAL,

@@ -12,13 +12,15 @@
 <%@ include file= "../include/header.jsp" %>
 <%@ include file= "../include/nav.jsp" %>
 	<div class="container" style="margin-top: 30px">
-	<form action = "/admin/insertProduct" method="post">
+	<form role = "form" method="POST" action="/admin/insertProduct" enctype="multipart/form-data">
 	<div class="form-group">
 	<label for="productName">상품이름 : </label>
     <input type="text" class="form-control" name="productName"></div> 
 	 <div class="form-group">
     <label for="img">이미지 디테일 : </label>
-    <input type="text" class="form-control" name="img"></div>
+    <input type="file" class="form-control" name="img"></div>
+    <%=request.getRealPath("/") %>
+    
 	 <div class="form-group">
 	<label for="price">상품가격 : </label>
     <input type="text" class="form-control" name="price"></div> 

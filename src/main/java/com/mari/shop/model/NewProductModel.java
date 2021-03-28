@@ -1,5 +1,7 @@
 package com.mari.shop.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class NewProductModel {
 	private String detail;
-	private String img;
+	private MultipartFile img;
 	private int price;
 	private String productName;
 	private int stock;

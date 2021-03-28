@@ -20,7 +20,7 @@ public interface ProductService {
 	
 	public int update(Product product);
 	
-	public int insert(NewProductModel product);
+	public int insert(Product product);
 	
 	public List<Product> selectWithPage(PageObject pageObject);
 	

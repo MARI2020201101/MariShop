@@ -76,8 +76,4 @@ public class UserController {
 		return "/user/items";
 		
 	}
-	@GetMapping("/user/updateItems")
-	public String updateItems() {
-		return "/user/updateItems";
-	}
 }

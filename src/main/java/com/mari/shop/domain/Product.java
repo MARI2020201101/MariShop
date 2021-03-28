@@ -28,5 +28,16 @@ public class Product {
 	private String productName;
 	private int stock;
 	private Long categoryId;
+	
+	
+	public Product(String detail, String img, int price, String productName, int stock, Long categoryId) {
+		super();
+		this.detail = detail;
+		this.img = img;
+		this.price = price;
+		this.productName = productName;
+		this.stock = stock;
+		this.categoryId = categoryId;
+	}
 
 }
