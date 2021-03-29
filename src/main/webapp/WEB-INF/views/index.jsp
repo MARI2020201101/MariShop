@@ -19,7 +19,8 @@
 				<c:forEach var="product" items="${productList }">
 					<div class="col-sm-3" style="margin: 10px">
 						<div class="card" style="width: 100%">
-							<img class="card-img-top" alt="Card image">
+							<img src = "${product.thumbImg }" class="card-img-top" alt="Card image">
+							<img src = "${product.img }" class="card-img-top" alt="Card image">
 							<div class="card-body">
 								<a href="${product.productId}">
 									<h4 class="card-title">${product.productName }</h4>

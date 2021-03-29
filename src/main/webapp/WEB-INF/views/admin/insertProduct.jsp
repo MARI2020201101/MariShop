@@ -19,8 +19,6 @@
 	 <div class="form-group">
     <label for="img">이미지 디테일 : </label>
     <input type="file" class="form-control" name="img"></div>
-    <%=request.getRealPath("/") %>
-    
 	 <div class="form-group">
 	<label for="price">상품가격 : </label>
     <input type="text" class="form-control" name="price"></div> 

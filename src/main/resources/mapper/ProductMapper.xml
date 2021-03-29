@@ -9,6 +9,7 @@
 		<id column="PRODUCT_ID" property="productId"/>
 		<result column="DETAIL" property="detail"/>
 		<result column="IMG" property="img"/>
+		<result column="THUMBIMG" property="thumbImg"/>
 		<result column="PRICE" property="price"/>
 		<result column="PRODUCT_NAME" property="productName"/>
 		<result column="STOCK" property="stock"/>
@@ -32,11 +33,12 @@
 </delete>
 
 <insert id="insert" parameterType ="com.mari.shop.domain.Product">
-	insert into TBL_PRODUCT(PRODUCT_ID,DETAIL,IMG,PRICE,PRODUCT_NAME,STOCK,CATEGORY_ID) 
+	insert into TBL_PRODUCT(PRODUCT_ID,DETAIL,IMG,THUMBIMG,PRICE,PRODUCT_NAME,STOCK,CATEGORY_ID) 
 		values (
 		PRODUCT_SEQ.NEXTVAL,
 		#{detail},
 		#{img},
+		#{thumbImg},
 		#{price},
 		#{productName},
 		#{stock},

@@ -23,6 +23,7 @@ import com.mari.shop.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import net.coobird.thumbnailator.Thumbnailator;
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 @RequestMapping("/admin/**")
@@ -96,30 +97,27 @@ public class AdminController {
 	
 	@PostMapping("/insertProduct")
 	public String insertProduct(NewProductModel newProduct ,@RequestParam(value="img", required=false) MultipartFile img, RedirectAttributes rttr) {
-		String uploadFolder = "C:/study/upload/";
+		String realUploadFolder = "C:/study/shop/src/main/resources/static/upload/";
 		String uploadFilename ="";
+		String uploadFolder = "upload/";
+		
 		if(img!=null) {
-		MultipartFile imgFile = img;
-		log.info("----------->>\n\n img info \n");
-		log.info("img.getContentType() :" + img.getContentType());
-		log.info("img.getSize() : " + img.getSize()+"");
-		log.info("img.getOriginalFilename() :" + img.getOriginalFilename());
+		
 		UUID uuid = UUID.randomUUID();
 		uploadFilename = uuid.toString() + "_" + img.getOriginalFilename();
-		File saveFile = new File(uploadFolder,uploadFilename);
+		File saveFile = new File(realUploadFolder,uploadFilename);
+		
 		log.info("saved File name : " + saveFile.getName());
 		log.info("saved File getAbsolutePath : " + saveFile.getAbsolutePath());
+		log.info("saved File getPath : " + saveFile.getPath());
 		try {
 			img.transferTo(saveFile);
-			FileOutputStream thumbnail = new FileOutputStream(new File(uploadFolder, "s_" + uploadFilename));
-			Thumbnailator.createThumbnail(imgFile.getInputStream(), thumbnail, 100,100);
-			thumbnail.close();
+			Thumbnailator.createThumbnail(saveFile,new File(realUploadFolder+"s_"+saveFile.getName()), 100, 100);
+			
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.info(e.getMessage());
 		}
 		}
-		
-		
 		
 		Product product = Product.builder()
 				.productName(newProduct.getProductName())
@@ -128,6 +126,7 @@ public class AdminController {
 				.price(newProduct.getPrice())
 				.stock(newProduct.getStock())
 				.img(uploadFolder+uploadFilename)
+				.thumbImg(uploadFolder+"s_"+uploadFilename)
 				.build();
 									
 		int result = productService.insert(product);
