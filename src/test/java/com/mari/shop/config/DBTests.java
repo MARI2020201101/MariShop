@@ -160,8 +160,8 @@ public class DBTests {
 												.productName("test 인형")
 												.stock(29)
 												.build();
-		int result= productMapper.insert(npro);
-		log.info("=========insert result : "+ result);
+		//int result= productMapper.insert(npro);
+		//log.info("=========insert result : "+ result);
 		}
 	
 	public void updateProductTest() throws Exception {

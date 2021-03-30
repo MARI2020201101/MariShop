@@ -38,8 +38,12 @@
     <textarea class="form-control" rows="3" name="detail"></textarea></div>
 	<button type="submit" class="btn btn-success my-3">등록</button>
 	</form>
-	
+	<div class = "uploadDiv">
+		<input type="file" name="uploadImg" id ="uploadImg" multiple>
+		<button id ="uploadBtn">Upload</button>
+	</div>
 	</div>
 	<%@ include file= "../include/footer.jsp" %>
 </body>
+<script src = "/js/products.js"></script>
 </html>

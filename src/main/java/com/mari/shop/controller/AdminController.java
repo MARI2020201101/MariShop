@@ -19,6 +19,7 @@ import com.mari.shop.domain.User;
 import com.mari.shop.model.NewProductModel;
 import com.mari.shop.service.AdminService;
 import com.mari.shop.service.ProductService;
+import com.mari.shop.utils.UploadUtils;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -97,22 +98,20 @@ public class AdminController {
 	
 	@PostMapping("/insertProduct")
 	public String insertProduct(NewProductModel newProduct ,@RequestParam(value="img", required=false) MultipartFile img, RedirectAttributes rttr) {
-		String realUploadFolder = "C:/study/shop/src/main/resources/static/upload/";
 		String uploadFilename ="";
-		String uploadFolder = "upload/";
 		
 		if(img!=null) {
 		
 		UUID uuid = UUID.randomUUID();
 		uploadFilename = uuid.toString() + "_" + img.getOriginalFilename();
-		File saveFile = new File(realUploadFolder,uploadFilename);
+		File saveFile = new File(UploadUtils.realUploadFolder,uploadFilename);
 		
 		log.info("saved File name : " + saveFile.getName());
 		log.info("saved File getAbsolutePath : " + saveFile.getAbsolutePath());
 		log.info("saved File getPath : " + saveFile.getPath());
 		try {
 			img.transferTo(saveFile);
-			Thumbnailator.createThumbnail(saveFile,new File(realUploadFolder+"s_"+saveFile.getName()), 100, 100);
+			Thumbnailator.createThumbnail(saveFile,new File(UploadUtils.realUploadFolder+"s_"+saveFile.getName()), 100, 100);
 			
 		} catch (Exception e) {
 			log.info(e.getMessage());
@@ -125,8 +124,8 @@ public class AdminController {
 				.detail(newProduct.getDetail())
 				.price(newProduct.getPrice())
 				.stock(newProduct.getStock())
-				.img(uploadFolder+uploadFilename)
-				.thumbImg(uploadFolder+"s_"+uploadFilename)
+				.img(UploadUtils.uploadFolder+uploadFilename)
+				.thumbImg(UploadUtils.uploadFolder+"s_"+uploadFilename)
 				.build();
 									
 		int result = productService.insert(product);
