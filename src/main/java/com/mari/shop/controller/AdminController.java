@@ -1,7 +1,6 @@
 package com.mari.shop.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mari.shop.domain.Attach;
 import com.mari.shop.domain.Product;
 import com.mari.shop.domain.User;
 import com.mari.shop.model.NewProductModel;
@@ -24,7 +24,6 @@ import com.mari.shop.utils.UploadUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import net.coobird.thumbnailator.Thumbnailator;
-import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 @RequestMapping("/admin/**")
@@ -60,8 +59,8 @@ public class AdminController {
 	@GetMapping("/manageProduct")
 	public String manageProduct(Model model) {
 		log.info("---------------------------------manageProduct");
-		List<Product> productList = productService.selectAll();
-		model.addAttribute("productList",productList);
+		//List<Product> productList = productService.selectAll();
+		//model.addAttribute("productList",productList);
 		return "/admin/manageProduct";
 	}
 	@GetMapping("/updateProduct")
@@ -111,22 +110,26 @@ public class AdminController {
 		log.info("saved File getPath : " + saveFile.getPath());
 		try {
 			img.transferTo(saveFile);
-			Thumbnailator.createThumbnail(saveFile,new File(UploadUtils.realUploadFolder+"s_"+saveFile.getName()), 100, 100);
+			Thumbnailator.createThumbnail(saveFile,new File(UploadUtils.realUploadFolder+"s_"+saveFile.getName()), 160, 160);
 			
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
 		}
+		newProduct.getAttaches().forEach(i-> log.info( 
+				"\n new Product attaches :" + i.getUuid() + i.getImgName() + i.getUploadPath()));
 		
 		Product product = Product.builder()
 				.productName(newProduct.getProductName())
-				.categoryId(newProduct.getCategoryId())
-				.detail(newProduct.getDetail())
 				.price(newProduct.getPrice())
 				.stock(newProduct.getStock())
+				.categoryId(newProduct.getCategoryId())
+				.detail(newProduct.getDetail())
 				.img(UploadUtils.uploadFolder+uploadFilename)
 				.thumbImg(UploadUtils.uploadFolder+"s_"+uploadFilename)
+				.attaches(newProduct.getAttaches())
 				.build();
+		
 									
 		int result = productService.insert(product);
 		if(result!=0) {

@@ -8,11 +8,12 @@
   <meta charset="utf-8">
 <%@ include file="../js/bootstrap.jsp"%>
 </head>
+<link rel="stylesheet" href="../css/style.css">
 <body>
 <%@ include file= "../include/header.jsp" %>
 <%@ include file= "../include/nav.jsp" %>
 	<div class="container" style="margin-top: 30px">
-	<form role = "form" method="POST" action="/admin/insertProduct" enctype="multipart/form-data">
+	<form role = "form" id = "insertForm" method="POST" action="/admin/insertProduct" enctype="multipart/form-data">
 	<div class="form-group">
 	<label for="productName">상품이름 : </label>
     <input type="text" class="form-control" name="productName"></div> 
@@ -36,11 +37,14 @@
      <div class="form-group"> 
     <label for="detail">상품디테일 : </label>
     <textarea class="form-control" rows="3" name="detail"></textarea></div>
-	<button type="submit" class="btn btn-success my-3">등록</button>
+	<button type="submit" class="btn btn-success my-3" >등록</button>
 	</form>
 	<div class = "uploadDiv">
 		<input type="file" name="uploadImg" id ="uploadImg" multiple>
 		<button id ="uploadBtn">Upload</button>
+	</div>
+	<div class="form-group" id ="uploadResult">
+		<ul></ul>
 	</div>
 	</div>
 	<%@ include file= "../include/footer.jsp" %>

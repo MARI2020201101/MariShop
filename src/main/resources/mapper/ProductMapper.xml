@@ -14,6 +14,13 @@
 		<result column="PRODUCT_NAME" property="productName"/>
 		<result column="STOCK" property="stock"/>
 		<result column="CATEGORY_ID" property="categoryId"/>
+	
+	<collection property="attaches" ofType="com.mari.shop.domain.Attach">
+    	<id column="UUID" property="uuid"/>
+		<result column="IMGNAME" property="imgName"/>
+		<result column="UPLOADPATH" property="uploadPath"/>
+		<result column="PRODUCT_ID" property="productId"/>
+    </collection>
 	</resultMap>
 
 <select id="selectAll" resultMap="productMap">
@@ -45,6 +52,7 @@
 		#{categoryId}
 		)
 </insert>
+
 <update id="update" parameterType="com.mari.shop.domain.Product">
 	update TBL_PRODUCT set
 		DETAIL = #{detail},

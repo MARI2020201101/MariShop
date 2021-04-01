@@ -1,5 +1,9 @@
 package com.mari.shop.domain;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,7 +34,7 @@ public class Product {
 	private Long categoryId;
 	private String thumbImg;
 	
-	
+	private List<Attach> attaches;
 	
 	public Product(String detail, String img, int price, String productName, int stock, Long categoryId) {
 		super();

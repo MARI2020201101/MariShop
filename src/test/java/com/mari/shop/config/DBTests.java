@@ -21,6 +21,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.mari.shop.domain.Attach;
 import com.mari.shop.domain.OrderItem;
 import com.mari.shop.domain.Product;
 import com.mari.shop.mapper.OrderItemMapper;
@@ -212,7 +213,7 @@ public class DBTests {
 		orderItemMapper.insert(orderItem);
 	}
 	
-	@Test
+	
 	public void orderSelectTest() throws Exception{
 		log.info("-------------orderItem mapper select Test-----------------");
 		List<OrderItemJoinVO> orderItemMap = orderItemMapper.selectWithProduct(28L);
@@ -230,6 +231,23 @@ public class DBTests {
 		OrderItem orderItem = OrderItem.builder().orderItemId(2L).productId(67L).totalPrice(210000).count(2).userId(28L).build();
 		int result = orderItemMapper.update(orderItem);
 		log.info("---------------------->>\n\n\n result : \n"+ result);
+	}
+	
+	@Test
+	public void selectKeyTest() throws Exception{
+		log.info("-------------selectKeyTest-----------------");
+		Attach attach = Attach.builder().imgName("attach").uuid("uuid").uploadPath("path").build();
+		Product product = Product.builder()
+				.categoryId(2L)
+				.detail("detail insert test")
+				.img("img~~")
+				.thumbImg("S_img")
+				.price(99000)
+				.productName("mapper test")
+				.stock(29)
+				.attaches(List.of(attach))
+				.build();
+		productMapper.insert(product);
 	}
 			
 }
