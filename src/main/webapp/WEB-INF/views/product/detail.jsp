@@ -9,6 +9,7 @@
 <meta charset="utf-8">
 <%@ include file="../js/bootstrap.jsp"%>
 </head>
+<link rel="stylesheet" href="css/style.css">
 <body>
 	<%@ include file="../include/header.jsp"%>
 	<%@ include file="../include/nav.jsp"%>
@@ -20,21 +21,21 @@
 			<input type="hidden" name="keyword"
 				value="${pageObject.cri.keyword }"> <input type="hidden"
 				name="categoryId" value="${pageObject.cri.categoryId }">
-			<h2>${product.productName }</h2>
-			<div class="row">
-				<div class="col-sm">
-					<p>
-						<img class="card-img-top" alt="Card image">
+			<h1>${product.productName }</h1>
+			<hr>
+			<div class="image">
+					<p >
+						<img src = "${product.img }"class="card-img-top" alt="Card image">
 					</p>
-				</div>
-				<div class="col-sm">
-					<p>${product.price }원</p>
-				</div>
-<div class="col-sm">
-					<p>재고 : ${product.stock }</p>
-				</div>
 			</div>
+			<hr>
+				<h3>가격 : ${product.price } 원</h3>
+				<h3>재고 : ${product.stock } 개</h3>
+			<hr>
+			<h3>상세 설명</h3>
 			<p>${product.detail }</p>
+			<div class="imgDiv" >
+			</div>
 		</form>
 		<br>
 		<hr>
@@ -45,6 +46,7 @@
 			<option value=3>3</option>
 			<option value=4>4</option>
 		</select> 
+		<br>
 		<input type ="hidden" id ="productId" value="${product.productId}">
 		<input type ="hidden" id ="totalPrice" value="${product.price}">
 		<sec:authorize access="isAuthenticated()">
@@ -57,4 +59,5 @@
 	<%@ include file="../include/footer.jsp"%>
 </body>
 <script src = "/js/items.js"></script>
+<script src = "/js/detail.js"></script>
 </html>

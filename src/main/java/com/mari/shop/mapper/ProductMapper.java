@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mari.shop.domain.Attach;
 import com.mari.shop.domain.Product;
 import com.mari.shop.model.Criteria;
 import com.mari.shop.model.PageObject;
@@ -30,4 +31,8 @@ public interface ProductMapper {
 	public List<Product> selectByCategoryIdWithPage(PageObject pageObject);
 	
 	public List<Product> list(PageObject pageObject);
+	
+	public int insertAttach(Attach attach);
+	
+	public List<Attach> selectAttach(Long productId);
 }

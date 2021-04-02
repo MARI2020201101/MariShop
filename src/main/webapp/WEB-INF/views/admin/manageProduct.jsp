@@ -42,20 +42,64 @@
       <td>${product.stock }</td>
       <td>${product.price }</td>
       <td>${product.categoryId }</td>
-      <td><a href=/admin/updateProduct?productId=${product.productId }
+      <td><a href="/admin/updateProduct?productId=${product.productId }"
       	class="btn btn-warning" name="productId">수정</a></td>
 
     </tr>
   </tbody>
  </c:forEach>
 </table>
-
+<form id="move" action="/admin/manageProduct" method="get">
+<input type ="hidden" name ="totalCnt" value="${pageObject.totalCnt }">
+		<input type ="hidden" name ="keyword" value="${pageObject.cri.keyword }">
+		<input type="hidden" name="categoryId" value="${pageObject.cri.categoryId }">
+		<input type="hidden" name="currPage" >
+<nav aria-label="Page navigation">
+				<ul class="pagination justify-content-end">
+					<li class="page-item ${pageObject.prevPage? "":"disabled" }"><a
+						class="page-link" href="${pageObject.startPage-1 }">Previous</a></li>
+					<c:forEach var="page" begin="${pageObject.startPage }"
+						end="${pageObject.endPage }">
+						<li class="page-item ${page==pageObject.currPage? "active" : "" }" >
+							<a class="page-link" href="${page }">${page }</a>
+						</li>
+					</c:forEach>
+					<li class="page-item ${pageObject.nextPage? "
+						":"disabled" }" name="currPage"><a class="page-link"
+						href="${pageObject.endPage-1 }">Next</a></li>
+				</ul>
+			</nav>
+			</form>
 </div>
 <%@ include file= "../include/footer.jsp" %>
 </body>
-<c:if test="${not empty result}">
-<script>
 
+<script>
+ var move =$("#move");
+ var detail = $("detail");
+ var keyword = $("#keyword").val();
+ $(".page-link").on("click", function(e){
+	 e.preventDefault();
+	 var page= $(this);
+	 var href = page.attr("href");
+	 move.find("input[name='currPage']").val(href);
+	 move.submit();
+
+	 });
+ 
+ $("div.card").on("click", function(e){
+	 e.preventDefault();
+	 var product = $(this);
+	 var href = product.find("a").attr("href");
+	 console.log(href);
+	 var h = $("<input>");
+	 h.attr("type","hidden");
+	 h.attr("name", "productId");
+	 h.attr("value", href);
+	 h.appendTo("#detail");
+	 console.log(h);
+	 $("#detail").submit();
+	 }); 
 </script>
-</c:if>
+
 </html>

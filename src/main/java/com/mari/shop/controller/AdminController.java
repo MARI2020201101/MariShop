@@ -16,7 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.mari.shop.domain.Attach;
 import com.mari.shop.domain.Product;
 import com.mari.shop.domain.User;
+import com.mari.shop.model.Criteria;
 import com.mari.shop.model.NewProductModel;
+import com.mari.shop.model.PageObject;
 import com.mari.shop.service.AdminService;
 import com.mari.shop.service.ProductService;
 import com.mari.shop.utils.UploadUtils;
@@ -57,10 +59,15 @@ public class AdminController {
 			
 	}
 	@GetMapping("/manageProduct")
-	public String manageProduct(Model model) {
+	public String manageProduct(Model model, Criteria cri, @RequestParam(defaultValue = "1")int currPage) {
 		log.info("---------------------------------manageProduct");
-		//List<Product> productList = productService.selectAll();
-		//model.addAttribute("productList",productList);
+		
+		int totalCnt = productService.countAll(cri);
+		PageObject pageObject = new PageObject(totalCnt, currPage, cri);
+		List<Product> productList = productService.list(pageObject);
+		model.addAttribute("pageObject",pageObject);
+		model.addAttribute("productList",productList);
+		
 		return "/admin/manageProduct";
 	}
 	@GetMapping("/updateProduct")
@@ -96,7 +103,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("/insertProduct")
-	public String insertProduct(NewProductModel newProduct ,@RequestParam(value="img", required=false) MultipartFile img, RedirectAttributes rttr) {
+	public String insertProduct(NewProductModel newProduct ,@RequestParam(value="img", required=false) MultipartFile img, RedirectAttributes rttr) throws Exception {
 		String uploadFilename ="";
 		
 		if(img!=null) {

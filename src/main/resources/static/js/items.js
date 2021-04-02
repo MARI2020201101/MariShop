@@ -15,7 +15,11 @@ $("#newitem").on("click",function(e){
 });
 
 function listItems(){
-	var userId = $("#userId").val();
+	
+	var userId;
+	if ($("#userId").val()!=null){
+			userId = $("#userId").val();
+	
 	$.ajax({
 		url:"/items/" + userId,
 		method: "GET",
@@ -30,6 +34,8 @@ function listItems(){
 		console.log(status);
 		console.log(errorThrown);
 	});
+			}
+else{return;}
 }
 
 function list(data){

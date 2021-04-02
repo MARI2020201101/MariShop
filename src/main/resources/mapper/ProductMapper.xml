@@ -15,13 +15,16 @@
 		<result column="STOCK" property="stock"/>
 		<result column="CATEGORY_ID" property="categoryId"/>
 	
-	<collection property="attaches" ofType="com.mari.shop.domain.Attach">
-    	<id column="UUID" property="uuid"/>
+	<collection property="attaches" resultMap="attachMap"></collection>
+	</resultMap>
+	
+	<resultMap type="com.mari.shop.domain.Attach" id="attachMap">
+		<id column="UUID" property="uuid"/>
 		<result column="IMGNAME" property="imgName"/>
 		<result column="UPLOADPATH" property="uploadPath"/>
 		<result column="PRODUCT_ID" property="productId"/>
-    </collection>
 	</resultMap>
+
 
 <select id="selectAll" resultMap="productMap">
     select * from TBL_PRODUCT ORDER BY PRODUCT_ID ASC
@@ -34,15 +37,20 @@
 <select id="selectByProductId" resultMap="productMap" parameterType="long">
 	select * from TBL_PRODUCT WHERE PRODUCT_ID = #{productId}
 </select>
-
+<select id ="selectAttach" resultMap="attachMap" parameterType="long">
+	select * from TBL_ATTACH where PRODUCT_ID = #{productId}
+</select>
 <delete id="delete" parameterType ="long">
  	delete FROM TBL_PRODUCT WHERE PRODUCT_ID = #{productId}
 </delete>
 
 <insert id="insert" parameterType ="com.mari.shop.domain.Product">
+<selectKey  keyProperty="productId" order="BEFORE" resultType="long">
+select PRODUCT_SEQ.NEXTVAL from dual
+</selectKey>
 	insert into TBL_PRODUCT(PRODUCT_ID,DETAIL,IMG,THUMBIMG,PRICE,PRODUCT_NAME,STOCK,CATEGORY_ID) 
 		values (
-		PRODUCT_SEQ.NEXTVAL,
+		#{productId},
 		#{detail},
 		#{img},
 		#{thumbImg},
@@ -51,6 +59,14 @@
 		#{stock},
 		#{categoryId}
 		)
+</insert>
+<insert id="insertAttach" parameterType ="com.mari.shop.domain.Attach" >
+<selectKey  keyProperty="productId" order="BEFORE" resultType="long">
+select PRODUCT_SEQ.CURRVAL from dual
+</selectKey>
+	insert into TBL_ATTACH(UUID, IMGNAME, UPLOADPATH, PRODUCT_ID) values
+	(#{uuid}, #{imgName}, #{uploadPath}, #{productId})
+
 </insert>
 
 <update id="update" parameterType="com.mari.shop.domain.Product">

@@ -20,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mari.shop.domain.Attach;
 import com.mari.shop.domain.OrderItem;
@@ -233,10 +234,12 @@ public class DBTests {
 		log.info("---------------------->>\n\n\n result : \n"+ result);
 	}
 	
-	@Test
+	
+	@Transactional
 	public void selectKeyTest() throws Exception{
 		log.info("-------------selectKeyTest-----------------");
 		Attach attach = Attach.builder().imgName("attach").uuid("uuid").uploadPath("path").build();
+		Attach attach2 = Attach.builder().imgName("attach2").uuid("uuid2").uploadPath("path2").build();
 		Product product = Product.builder()
 				.categoryId(2L)
 				.detail("detail insert test")
@@ -245,9 +248,20 @@ public class DBTests {
 				.price(99000)
 				.productName("mapper test")
 				.stock(29)
-				.attaches(List.of(attach))
+				.attaches(List.of(attach,attach2))
 				.build();
 		productMapper.insert(product);
+		
+		for(Attach a : product.getAttaches()) {
+			productMapper.insertAttach(a);
+		}
 	}
-			
+	@Test
+	public void selectAttach() throws Exception{
+		log.info("-------------selectAttach Test-----------------");
+		List<Attach> attaches = productMapper.selectAttach(157L);
+		
+	}
+	
+	
 }

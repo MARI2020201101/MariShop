@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,12 +19,13 @@
 	<%@ include file="include/nav.jsp"%>
 	<div class="container " style="margin-top: 30px">
 		<h2>전체상품</h2>
-		<form id="detail" action="/product/detail" method="get">
+		<form id="detail" action="/detail" method="get">
 			<div class="row justify-content-center">
 				<c:forEach var="product" items="${productList }">
 					<div class="col-sm-3" style="margin: 10px">
 						<div class="card" style="width: 100%">
 							<img src = "${product.thumbImg }" class="card-img-top" alt="Card image">
+							
 							<div class="card-body">
 								<a href="${product.productId}">
 									<h4 class="card-title">${product.productName }</h4>

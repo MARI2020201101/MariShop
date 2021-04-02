@@ -3,11 +3,12 @@ package com.mari.shop.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.mari.shop.domain.Attach;
 import com.mari.shop.domain.Product;
 import com.mari.shop.mapper.ProductMapper;
 import com.mari.shop.model.Criteria;
-import com.mari.shop.model.NewProductModel;
 import com.mari.shop.model.PageObject;
 
 import lombok.RequiredArgsConstructor;
@@ -37,8 +38,14 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.update(product);
 	}
 	@Override
-	public int insert(Product product) {
-		return productMapper.insert(product);
+	@Transactional
+	public int insert(Product product) throws Exception{
+		int result = 0;
+		result = productMapper.insert(product);
+		for(Attach a: product.getAttaches()) {
+			result += productMapper.insertAttach(a);
+		}
+		return result;
 	}
 	@Override
 	public List<Product> selectWithPage(PageObject pageObject) {
@@ -59,6 +66,10 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<Product> list(PageObject pageObject) {
 		return productMapper.list(pageObject);
+	}
+	@Override
+	public List<Attach> selectAttach(Long productId) {
+		return productMapper.selectAttach(productId);
 	}
 
 }

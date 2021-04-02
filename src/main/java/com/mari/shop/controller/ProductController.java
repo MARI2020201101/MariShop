@@ -19,7 +19,7 @@ import lombok.extern.java.Log;
 @Controller
 @Log
 @RequiredArgsConstructor
-@RequestMapping("/product/**")
+//@RequestMapping("/product/**")
 public class ProductController {
 
 	private final ProductService productService;
