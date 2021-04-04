@@ -33,4 +33,6 @@ public interface ProductService {
 	public List<Product> list(PageObject pageObject);
 	
 	public List<Attach> selectAttach(Long productId);
+
+	public List<Product> list_v2(PageObject pageObject);
 }

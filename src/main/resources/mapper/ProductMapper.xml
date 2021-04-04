@@ -141,4 +141,23 @@ select PRODUCT_SEQ.CURRVAL from dual
       ]]>
 </select>
 
+<select id ="list_v2" resultMap="productMap" parameterType ="com.mari.shop.model.PageObject">
+<![CDATA[
+ SELECT * FROM(
+ SELECT TT.*, ROWNUM RN FROM(
+ select T.* from tbl_product T ORDER BY PRODUCT_ID DESC)TT
+        ]]>
+  <where>
+  	<if test = "cri.categoryId != null">
+	CATEGORY_ID = #{cri.categoryId}
+	</if>
+	<if test ="cri.keyword !=null">
+	AND PRODUCT_NAME like '%'||#{cri.keyword}||'%'
+	</if>
+ 	</where>
+ 	<![CDATA[
+ 	)
+ WHERE RN<= #{currPage}*#{criCnt} AND RN > (#{currPage}-1)*#{criCnt}
+        ]]>
+</select>
 </mapper>

@@ -71,5 +71,9 @@ public class ProductServiceImpl implements ProductService{
 	public List<Attach> selectAttach(Long productId) {
 		return productMapper.selectAttach(productId);
 	}
+	@Override
+	public List<Product> list_v2(PageObject pageObject) {
+		return productMapper.list_v2(pageObject);
+	}
 
 }

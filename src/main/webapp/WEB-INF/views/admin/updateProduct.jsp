@@ -8,10 +8,11 @@
   <meta charset="utf-8">
 <%@ include file="../js/bootstrap.jsp"%>
 </head>
+<link rel="stylesheet" href="css/style.css">
 <body>
 <%@ include file= "../include/header.jsp" %>
 <%@ include file= "../include/nav.jsp" %>
-	<div class="container" style="margin-top: 30px">
+<div class="container" style="margin-top: 30px">
 	<form action = "/admin/updateProduct" method="post">
 	<div class="form-group">
 	 <input type="text" class="form-control" value= "${product.productId}" name="productId" readonly></div> 
@@ -21,7 +22,9 @@
 	 <div class="form-group">
     <label for="img">이미지 디테일 : </label>
     <input type="text" class="form-control" value= "${product.img}" name="img"></div>
-
+	<p>
+	 <img src = "${product.img }"class="card-img-top" alt="Card image">
+	</p>
 	 <div class="form-group">
 	<label for="price">상품가격 : </label>
     <input type="text" class="form-control" value= "${product.price}" name="price"></div> 
@@ -39,6 +42,7 @@
      <div class="form-group"> 
     <label for="detail">상품디테일 : </label>
     <textarea class="form-control" rows="3" name="detail">${product.detail }</textarea></div>
+    <div class="imgDiv" ></div>
 	<button type="submit" class="btn btn-warning my-3">수정</button>
 	<a href ="/admin/deleteProduct?productId=${product.productId }" class="btn btn-danger mx-2">삭제</a>
 	</form>
@@ -46,4 +50,12 @@
 	</div>
 	<%@ include file= "../include/footer.jsp" %>
 </body>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	console.log("ready");
+	var img = $("img");
+	console.log(img.attr("src"));
+})
+</script>
 </html>

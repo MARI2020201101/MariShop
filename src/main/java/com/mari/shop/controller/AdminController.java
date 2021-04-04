@@ -64,7 +64,7 @@ public class AdminController {
 		
 		int totalCnt = productService.countAll(cri);
 		PageObject pageObject = new PageObject(totalCnt, currPage, cri);
-		List<Product> productList = productService.list(pageObject);
+		List<Product> productList = productService.list_v2(pageObject);
 		model.addAttribute("pageObject",pageObject);
 		model.addAttribute("productList",productList);
 		

@@ -11,22 +11,19 @@
 </head>
 <link rel="stylesheet" href="css/style.css">
 <body>
-	<%@ include file="../include/header.jsp"%>
-	<%@ include file="../include/nav.jsp"%>
-	<div class="container" style="margin-top: 30px">
-		<form action="/" method="get">
-			<button class="btn btn-info my-3" type="submit">목록으로</button>
-			<input type="hidden" name="currPage" value="${ pageObject.currPage }">
-			<input type="hidden" name="totalCnt" value="${pageObject.totalCnt }">
-			<input type="hidden" name="keyword"
-				value="${pageObject.cri.keyword }"> <input type="hidden"
-				name="categoryId" value="${pageObject.cri.categoryId }">
+<%@ include file="../include/header.jsp"%>
+<%@ include file="../include/nav.jsp"%>
+<div class="container" style="margin-top: 30px">
+	<form action="/" method="get">
+		<button class="btn btn-info my-3" type="submit">목록으로</button>
+		<input type="hidden" name="currPage" value="${pageObject.currPage }">
+		<input type="hidden" name="totalCnt" value="${pageObject.totalCnt }">
+		<input type="hidden" name="keyword" value="${pageObject.cri.keyword }"> 
+		<input type="hidden" name="categoryId" value="${pageObject.cri.categoryId }">
 			<h1>${product.productName }</h1>
 			<hr>
 			<div class="image">
-					<p >
-						<img src = "${product.img }"class="card-img-top" alt="Card image">
-					</p>
+				<p><img src = "${product.img }"class="card-img-top" alt="Card image"></p>
 			</div>
 			<hr>
 				<h3>가격 : ${product.price } 원</h3>
@@ -34,9 +31,8 @@
 			<hr>
 			<h3>상세 설명</h3>
 			<p>${product.detail }</p>
-			<div class="imgDiv" >
-			</div>
-		</form>
+			<div class="imgDiv" ></div>
+	</form>
 		<br>
 		<hr>
 		<label for="count">구매 수량 : </label>

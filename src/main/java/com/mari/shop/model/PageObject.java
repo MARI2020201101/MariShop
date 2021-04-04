@@ -41,7 +41,7 @@ public class PageObject {
 		endPage = endPage>realEndPage? realEndPage : endPage;
 		startPage = endPage - 9;
 		startPage = startPage<1 ? 1:startPage;
-		prevPage = startPage == 1? false : true;
-		nextPage = endPage==realEndPage? false : true;
+		prevPage = currPage == 1? false : true;
+		nextPage = currPage==realEndPage? false : true;
 	}
 }

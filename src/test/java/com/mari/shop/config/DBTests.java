@@ -9,7 +9,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -256,12 +255,26 @@ public class DBTests {
 			productMapper.insertAttach(a);
 		}
 	}
-	@Test
+
 	public void selectAttach() throws Exception{
 		log.info("-------------selectAttach Test-----------------");
 		List<Attach> attaches = productMapper.selectAttach(157L);
 		
 	}
-	
+	@Test
+	public void listv2Test() throws Exception{
+		log.info("------------------list v2 test-----------------------");
+		/*
+		 *  1. 일반 리스트 
+		 *  2. 검색어o, 카테고리x 
+		 *  3. 검색어x, 카테고리o 
+		 *  4. 검색어o, 카테고리o
+		 */
+		
+		Criteria cri = new Criteria(1L,"왕");
+		int count = productMapper.countAll(cri);
+		PageObject pageObject = new PageObject(count,2,cri);
+		productMapper.list_v2(pageObject);
+	}
 	
 }

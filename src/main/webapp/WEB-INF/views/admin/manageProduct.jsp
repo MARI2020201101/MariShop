@@ -49,28 +49,27 @@
   </tbody>
  </c:forEach>
 </table>
-<form id="move" action="/admin/manageProduct" method="get">
-<input type ="hidden" name ="totalCnt" value="${pageObject.totalCnt }">
-		<input type ="hidden" name ="keyword" value="${pageObject.cri.keyword }">
-		<input type="hidden" name="categoryId" value="${pageObject.cri.categoryId }">
-		<input type="hidden" name="currPage" >
-<nav aria-label="Page navigation">
-				<ul class="pagination justify-content-end">
-					<li class="page-item ${pageObject.prevPage? "":"disabled" }"><a
-						class="page-link" href="${pageObject.startPage-1 }">Previous</a></li>
-					<c:forEach var="page" begin="${pageObject.startPage }"
-						end="${pageObject.endPage }">
-						<li class="page-item ${page==pageObject.currPage? "active" : "" }" >
-							<a class="page-link" href="${page }">${page }</a>
+		<form id="move" action="/admin/manageProduct" method="get">
+			<input type="hidden" name="totalCnt" value="${pageObject.totalCnt }">
+			<input type="hidden" name="keyword" value="${pageObject.cri.keyword }"> 
+			<input type="hidden" name="categoryId" value="${pageObject.cri.categoryId }"> 
+			<input type="hidden" name="currPage">
+				<nav aria-label="Page navigation">
+					<ul class="pagination justify-content-end">
+						<li class="page-item ${pageObject.prevPage? "":"disabled" }">
+						<a class="page-link" href="${pageObject.currPage-1 }">Previous</a></li>
+						<c:forEach var="page" begin="${pageObject.startPage }" end="${pageObject.endPage }">
+						<li class="page-item ${page==pageObject.currPage? "active" : "" }">
+						<a class="page-link" href="${page }">${page }</a>
 						</li>
-					</c:forEach>
-					<li class="page-item ${pageObject.nextPage? "
-						":"disabled" }" name="currPage"><a class="page-link"
-						href="${pageObject.endPage-1 }">Next</a></li>
-				</ul>
-			</nav>
-			</form>
-</div>
+						</c:forEach>
+						<li class="page-item ${pageObject.nextPage? "":"disabled" }">
+						<a class="page-link" href="${pageObject.currPage+1 }">Next</a>
+						</li>
+					</ul>
+				</nav>
+		</form>
+	</div>
 <%@ include file= "../include/footer.jsp" %>
 </body>
 
