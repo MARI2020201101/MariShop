@@ -1,5 +1,6 @@
 package com.mari.shop.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.core.Authentication;
@@ -7,14 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mari.shop.domain.Order;
 import com.mari.shop.domain.Product;
 import com.mari.shop.model.Criteria;
 import com.mari.shop.model.PageObject;
 import com.mari.shop.model.RegisterModel;
 import com.mari.shop.security.CustomUserDetails;
 import com.mari.shop.security.CustomUserDetailsService;
+import com.mari.shop.service.OrderService;
 import com.mari.shop.service.ProductService;
 import com.mari.shop.service.UserService;
 
@@ -28,6 +32,7 @@ public class UserController {
 	private final UserService userService;
 	private final CustomUserDetailsService userDetailsService;
 	private final ProductService productService;
+	private final OrderService orderService;
 
 	@GetMapping("/")
 	public String index(Model model, Criteria cri, @RequestParam(defaultValue = "1")int currPage) {
@@ -75,5 +80,13 @@ public class UserController {
 	public String items() {
 		return "/user/items";
 		
+	}
+	@PostMapping("/order")
+	public String order(Order order) {
+		order.getOrderItemId()
+		.forEach( i -> log.info("\n orderItemId : " + i.toString()+"\n"));
+		
+		orderService.insert(order);
+		return "redirect:/";
 	}
 }

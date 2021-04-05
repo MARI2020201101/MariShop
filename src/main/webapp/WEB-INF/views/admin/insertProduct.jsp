@@ -18,7 +18,7 @@
 	<label for="productName">상품이름 : </label>
     <input type="text" class="form-control" name="productName"></div> 
 	 <div class="form-group">
-    <label for="img">이미지 디테일 : </label>
+    <label for="img">대표 이미지 : </label>
     <input type="file" class="form-control" name="img"></div>
 	 <div class="form-group">
 	<label for="price">상품가격 : </label>
@@ -37,15 +37,21 @@
      <div class="form-group"> 
     <label for="detail">상품디테일 : </label>
     <textarea class="form-control" rows="3" name="detail"></textarea></div>
-	<button type="submit" class="btn btn-success my-3" >등록</button>
-	</form>
-	<div class = "uploadDiv">
+    <hr>
+    <br>
+    <div class = "uploadDiv">
+    	<p><strong>상세 이미지 등록하기 :</strong></p>
 		<input type="file" name="uploadImg" id ="uploadImg" multiple>
 		<button id ="uploadBtn">Upload</button>
 	</div>
 	<div class="form-group" id ="uploadResult">
 		<ul></ul>
 	</div>
+	<hr>
+    <br>
+	<button type="submit" class="btn btn-success my-3" >등록</button>
+	</form>
+	
 	</div>
 	<%@ include file= "../include/footer.jsp" %>
 </body>

@@ -25,6 +25,7 @@ import com.mari.shop.domain.Attach;
 import com.mari.shop.domain.OrderItem;
 import com.mari.shop.domain.Product;
 import com.mari.shop.mapper.OrderItemMapper;
+import com.mari.shop.mapper.OrderMapper;
 import com.mari.shop.mapper.ProductMapper;
 import com.mari.shop.mapper.UserMapper;
 import com.mari.shop.model.Criteria;
@@ -42,6 +43,8 @@ import lombok.extern.java.Log;
 public class DBTests {
 	@Autowired
 	private DataSource ds;
+	@Autowired
+	OrderMapper orderMapper;
 	
 	//private final Logger log = (Logger) LoggerFactory.getLogger(Logger.class);
 	static {
@@ -261,7 +264,7 @@ public class DBTests {
 		List<Attach> attaches = productMapper.selectAttach(157L);
 		
 	}
-	@Test
+	
 	public void listv2Test() throws Exception{
 		log.info("------------------list v2 test-----------------------");
 		/*
@@ -275,6 +278,19 @@ public class DBTests {
 		int count = productMapper.countAll(cri);
 		PageObject pageObject = new PageObject(count,2,cri);
 		productMapper.list_v2(pageObject);
+	}
+	
+	public void deleteAttachTest() throws Exception{
+		log.info("-------------------------deleteAttachTest------------------------");
+		productMapper.deleteAttach("545ad718-f548-40c8-97bd-14fb4aeece57_");
+		
+	}
+
+	
+	public void updateItemTest() throws Exception{
+		
+		OrderItem  o = new OrderItem(2L, orderMapper.selectMax());
+		orderMapper.updateOrderItem(o);
 	}
 	
 }

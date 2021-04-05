@@ -68,6 +68,10 @@ select PRODUCT_SEQ.CURRVAL from dual
 	(#{uuid}, #{imgName}, #{uploadPath}, #{productId})
 
 </insert>
+<insert id ="updateAttach" parameterType ="com.mari.shop.domain.Attach" >
+insert into TBL_ATTACH(UUID, IMGNAME, UPLOADPATH, PRODUCT_ID) values
+	(#{uuid}, #{imgName}, #{uploadPath}, #{productId})
+</insert>
 
 <update id="update" parameterType="com.mari.shop.domain.Product">
 	update TBL_PRODUCT set
@@ -160,4 +164,7 @@ select PRODUCT_SEQ.CURRVAL from dual
  WHERE RN<= #{currPage}*#{criCnt} AND RN > (#{currPage}-1)*#{criCnt}
         ]]>
 </select>
+<delete id ="deleteAttach" parameterType ="string">
+DELETE FROM TBL_ATTACH WHERE UUID = #{uuid}
+</delete>
 </mapper>

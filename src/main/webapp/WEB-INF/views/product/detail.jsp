@@ -48,8 +48,7 @@
 		<sec:authorize access="isAuthenticated()">
 		<input type ="hidden" id ="userId" value="<sec:authentication property="principal.user.userId" />">
 		</sec:authorize>
-		<sec:authorize access="isAuthenticated()">
-		<h3><sec:authentication property="principal" /></h3></sec:authorize>
+		<sec:authorize access="isAuthenticated()"></sec:authorize>
 		<button type="button" class="btn btn-warning" id="newitem">장바구니 추가</button>
 	</div>
 	<%@ include file="../include/footer.jsp"%>

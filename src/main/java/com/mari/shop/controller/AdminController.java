@@ -141,9 +141,9 @@ public class AdminController {
 		int result = productService.insert(product);
 		if(result!=0) {
 			rttr.addFlashAttribute("result","등록성공");
-			return "redirect:/admin/insertProduct"; }
+			return "redirect:/admin/manageProduct"; }
 		else { rttr.addFlashAttribute("result","등록실패");
-				return "redirect:/admin/insertProduct";
+				return "redirect:/admin/manageProduct";
 				
 		}
 	}

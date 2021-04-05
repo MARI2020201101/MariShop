@@ -21,7 +21,7 @@ public class PageObject {
 	 *         = 1*10 / 2*10 / 3*10..
 	 *         n*10 / 5.xxx.. = totalCnt/criCnt*10
 	 */
-	private int criCnt =10; //기준이 되는 게시글 카운트 수. 1페이지당 10개 보여주기 (초기값)
+	private int criCnt =9; //기준이 되는 게시글 카운트 수. 1페이지당 10개 보여주기 (초기값)
 	private int currPage =1; //현재 페이지. 초기값 1 설정
 	private int startPage;
 	private int endPage;

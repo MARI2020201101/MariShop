@@ -1,5 +1,7 @@
 package com.mari.shop.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,5 +25,28 @@ public class Order {
 	private String orderStatus; //comp, yet
 	private int totalOrderPrice;
 	private Long userId;
-	private Long orderItemId;
+	private List<Long> orderItemId;
+	
+	
+	public Order(int totalOrderPrice, Long userId) {
+		super();
+		this.totalOrderPrice = totalOrderPrice;
+		this.userId = userId;
+	}
+
+
+	public Order(String orderStatus, int totalOrderPrice, Long userId) {
+		super();
+		this.orderStatus = orderStatus;
+		this.totalOrderPrice = totalOrderPrice;
+		this.userId = userId;
+	}
+
+
+	public Order(int totalOrderPrice, Long userId, List<Long> orderItemId) {
+		super();
+		this.totalOrderPrice = totalOrderPrice;
+		this.userId = userId;
+		this.orderItemId = orderItemId;
+	}
 }

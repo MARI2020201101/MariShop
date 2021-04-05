@@ -35,7 +35,14 @@ public class ProductServiceImpl implements ProductService{
 	}
 	@Override
 	public int update(Product product) {
-		return productMapper.update(product);
+		int result = 0;
+		result = productMapper.update(product);
+		Long productId = product.getProductId();
+		for(Attach a: product.getAttaches()) {
+			a.setProductId(productId);
+			result += productMapper.updateAttach(a);
+		}
+		return result;
 	}
 	@Override
 	@Transactional
@@ -74,6 +81,10 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<Product> list_v2(PageObject pageObject) {
 		return productMapper.list_v2(pageObject);
+	}
+	@Override
+	public int deleteAttach(String uuid) {
+		return productMapper.deleteAttach(uuid);
 	}
 
 }

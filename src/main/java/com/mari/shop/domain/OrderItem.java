@@ -16,12 +16,15 @@ public class OrderItem {
 	 * TOTAL_PRICE NOT NULL NUMBER(10) 
 	 * PRODUCT_ID NUMBER(19)
 	 * USER_ID NUMBER(19,0)
+	 * ORDER_ID	NUMBER(19,0)	
 	 */
 	private Long orderItemId;
 	private int count; //주문 아이템 수량
 	private int totalPrice;
 	private Long productId;
 	private Long userId;
+	private Long orderId;
+	
 	
 	public OrderItem(int count, int totalPrice, Long productId,Long userId) {
 		super();
@@ -29,6 +32,19 @@ public class OrderItem {
 		this.totalPrice = totalPrice;
 		this.productId = productId;
 		this.userId = userId;
+	}
+
+
+	public OrderItem(Long orderItemId) {
+		super();
+		this.orderItemId = orderItemId;
+	}
+
+
+	public OrderItem(Long orderItemId, Long orderId) {
+		super();
+		this.orderItemId = orderItemId;
+		this.orderId = orderId;
 	}
 	
 	

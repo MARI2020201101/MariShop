@@ -1,9 +1,19 @@
 $( document ).ready(function() {
     console.log( "ready!" );
 	listItems();
+	$("#orderDiv").hide();
 });
 
+$("#orderBtn").on("click",function(e){
+	e.preventDefault();
+	$("#orderDiv").show();
+})
 
+$("#orderCommitBtn").on("click",function(e){
+	e.preventDefault();
+	alert("주문완료!");
+	$("#orderForm").submit();
+})
 $("#newitem").on("click",function(e){
 	console.log("newItem!>>",e)
 	if($("#userId").val()==null){
@@ -50,7 +60,6 @@ function list(data){
 		
 		str += "<tr>";
 		str += "<td>"+ data[i].product.productName + "</td>";
-		//str += "<td>"+ data[i].orderItem.count + "<select class=\"form-select mx-3\" id=\"updateCount\">";
 		str += "<td>"+ data[i].orderItem.count + "<select class=\"form-select mx-3\" id=\"updateCount"+data[i].orderItem.orderItemId+"\">";
 		str += "<option value=\"\">---</option>";
 		str += "<option value=1>1</option>";
@@ -61,6 +70,12 @@ function list(data){
 		str += "<td>" +data[i].orderItem.totalPrice + "</td>";
 		str += "<td><button type=\"button\" class=\"btn btn-outline-danger\" onclick=\"deleteItems("+data[i].orderItem.orderItemId+")\">삭제</button></td>";
 		str +=  "</tr>";
+		
+		var orderItemList = $("<input>");
+		orderItemList.attr("type","hidden");
+		orderItemList.attr("name","orderItemId["+i+"]");
+		orderItemList.val(data[i].orderItem.orderItemId);
+		orderItemList.appendTo("#orderForm");
 	}
 	items.append(str);
 	
@@ -70,7 +85,7 @@ function list(data){
 		
 	}
 	console.log("totalOrderPrice>>",totalOrderPrice);
-	$("#totalOrderPrice").val(totalOrderPrice +" 원");
+	$("#totalOrderPrice").val(totalOrderPrice);
 	
 
 }

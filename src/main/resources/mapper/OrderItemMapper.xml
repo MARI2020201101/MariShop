@@ -10,6 +10,7 @@
 		<result column="TOTAL_PRICE" property="totalPrice"/>
 		<result column="PRODUCT_ID" property="productId"/>
 		<result column="USER_ID" property="userId"/>
+		<result column="ORDER_ID" property="orderId"/>
 	 </resultMap>
 	 
  	<resultMap type="com.mari.shop.domain.Product" id="productMap">

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.mari.shop.mapper.OrderMapper"> 
+	
+	 <resultMap type="com.mari.shop.domain.Order" id="orderMap">
+	 	<id column="ORDER_ID" property="orderId"/>
+	 	<result column="ORDER_DATE" property="orderDate"/>
+		<result column="ORDER_STATUS" property="orderStatus"/>
+		<result column="TOTAL_PRICE" property="totalOrderPrice"/>
+		<result column="USER_ID" property="userId"/>
+	 </resultMap>
+		 <resultMap type="com.mari.shop.domain.OrderItem" id="orderItemMap">
+	 	<id column="ORDER_ITEM_ID" property="orderItemId"/>
+		<result column="COUNT" property="count"/>
+		<result column="TOTAL_PRICE" property="totalPrice"/>
+		<result column="PRODUCT_ID" property="productId"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="ORDER_ID" property="orderId"/>
+		
+	 </resultMap>   
+ <insert id ="insert" parameterType ="com.mari.shop.domain.Order">
+ <selectKey  keyProperty="orderId" order="BEFORE" resultType="long">
+select ORDER_SEQ.NEXTVAL from dual
+</selectKey>
+  insert into TBL_ORDER(ORDER_ID,ORDER_STATUS,TOTAL_PRICE,USER_ID ) 
+  					values(#{orderId},#{orderStatus},#{totalOrderPrice},#{userId})
+ </insert>
+ <select id="selectMax" resultType="long">
+ select max(ORDER_ID) from TBL_ORDER
+ </select>
+ 
+ <update id="updateOrderItem" parameterType ="com.mari.shop.domain.OrderItem">
+update TBL_ORDERITEM set ORDER_ID = #{orderId} where ORDER_ITEM_ID = #{orderItemId}
+ </update>
+
+</mapper>

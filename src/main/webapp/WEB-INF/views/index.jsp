@@ -18,7 +18,12 @@
 	<%@ include file="include/header.jsp"%>
 	<%@ include file="include/nav.jsp"%>
 	<div class="container " style="margin-top: 30px">
-		<h2>전체상품</h2>
+	<c:choose>
+	<c:when test="${pageObject.cri.categoryId ==1 }"><h2>대형인형</h2></c:when>
+	<c:when test="${pageObject.cri.categoryId ==2}"><h2>곰인형</h2></c:when>
+	<c:when test="${pageObject.cri.categoryId ==3}"><h2>인형</h2></c:when>
+	<c:otherwise><h2>전체상품</h2></c:otherwise>
+	</c:choose>	
 		<form id="detail" action="/detail" method="get">
 			<div class="row justify-content-center">
 				<c:forEach var="product" items="${productList }">
@@ -30,7 +35,7 @@
 								<a href="${product.productId}">
 									<h4 class="card-title">${product.productName }</h4>
 								</a>
-								<p class="card-text">${product.price }</p>
+								<p class="card-text">${product.price } 원</p>
 							</div>
 						</div>
 					</div>
@@ -44,8 +49,7 @@
 			</div>
 			<!-- row end -->
 		</form>
-		<h3>${pageObject }</h3>
-		                                                                            
+		                                                 
 		<form class="form-inline" action="/" method="get">
 		<select class="form-control" name="categoryId">
 		<option value="" ${pageObject.cri.categoryId==null? "selected":"" }>전체</option>

@@ -8,14 +8,14 @@
   <meta charset="utf-8">
 <%@ include file="../js/bootstrap.jsp"%>
 </head>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/css/style.css" id ="css">
 <body>
 <%@ include file= "../include/header.jsp" %>
 <%@ include file= "../include/nav.jsp" %>
 <div class="container" style="margin-top: 30px">
-	<form action = "/admin/updateProduct" method="post">
+	<form action = "/admin/updateProduct" method="post" id="updateForm">
 	<div class="form-group">
-	 <input type="text" class="form-control" value= "${product.productId}" name="productId" readonly></div> 
+	 <input type="text" class="form-control" value= "${product.productId}" name="productId" id="productId" readonly></div> 
 	 <div class="form-group">
 	<label for="productName">상품이름 : </label>
     <input type="text" class="form-control" value= "${product.productName}" name="productName"></div> 
@@ -23,7 +23,7 @@
     <label for="img">이미지 디테일 : </label>
     <input type="text" class="form-control" value= "${product.img}" name="img"></div>
 	<p>
-	 <img src = "${product.img }"class="card-img-top" alt="Card image">
+	 <img src = "${pageContext.request.contextPath}/${product.img }"class="card-img-top image" alt="Card image">
 	</p>
 	 <div class="form-group">
 	<label for="price">상품가격 : </label>
@@ -43,19 +43,25 @@
     <label for="detail">상품디테일 : </label>
     <textarea class="form-control" rows="3" name="detail">${product.detail }</textarea></div>
     <div class="imgDiv" ></div>
-	<button type="submit" class="btn btn-warning my-3">수정</button>
-	<a href ="/admin/deleteProduct?productId=${product.productId }" class="btn btn-danger mx-2">삭제</a>
-	</form>
-	
+    <hr>
+    <br>
+    <div class = "uploadDiv">
+    	<p><strong>상세 이미지 등록하기 :</strong></p>
+		<input type="file" name="uploadImg" id ="uploadImg" multiple>
+		<button id ="uploadBtn">Upload</button>
 	</div>
+	<div class="form-group" id ="uploadResult">
+		<ul></ul>
+	</div>
+	<hr>
+    <br>
+	<button type="submit" class="btn btn-warning my-3" >수정</button>
+	<a href ="/admin/deleteProduct?productId=${product.productId }" class="btn btn-danger mx-2">상품삭제</a>
+	</form>
+		
+	</div>
+	
 	<%@ include file= "../include/footer.jsp" %>
 </body>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	console.log("ready");
-	var img = $("img");
-	console.log(img.attr("src"));
-})
-</script>
+<script src = "/js/admin.js"></script>
 </html>
