@@ -25,12 +25,12 @@ public class UserServiceImpl implements UserService{
 		user= userMapper.selectByUsernameAndPassword(username,passwordEncoder.encode(password));
 		return user;
 	}
-	public void idCheck(String username) throws Exception{
-		User user = userMapper.selectByUsername(username);
+	public User idCheck(String username) throws Exception{
+		return userMapper.selectByUsername(username);
 		//exception 날리기!!!
-		if(user!=null) {
-			//이미 그 유저네임사용자가 있음
-			throw new UserAlreadyFoundException("사용할 수 없는 이름입니다.");
-		}
+		/*
+		 * if(user!=null) { //이미 그 유저네임사용자가 있음 throw new
+		 * UserAlreadyFoundException("사용할 수 없는 이름입니다."); }
+		 */
 	}
 }

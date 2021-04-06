@@ -99,6 +99,7 @@ function deleteItems(orderItemId){
 			console.log(xhr);
 			$("td").remove();
 			listItems();
+			list();
 		}).fail(function(xhr,status,errorThrown){
 			console.log(xhr);
 			console.log(xhr.responseText);
@@ -139,6 +140,7 @@ function updateItems(orderItemId,price,productId){
 		console.log(data);
 		$("td").remove();
 		listItems();
+		list();
 	}).fail(function(xhr,status,errorThrown){
 		console.log(xhr);
 		console.log(status);

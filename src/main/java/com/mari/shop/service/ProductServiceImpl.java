@@ -38,9 +38,11 @@ public class ProductServiceImpl implements ProductService{
 		int result = 0;
 		result = productMapper.update(product);
 		Long productId = product.getProductId();
-		for(Attach a: product.getAttaches()) {
-			a.setProductId(productId);
-			result += productMapper.updateAttach(a);
+		if(product.getAttaches()!=null) {
+			for(Attach a: product.getAttaches()) {
+				a.setProductId(productId);
+				result += productMapper.updateAttach(a);
+		}
 		}
 		return result;
 	}
